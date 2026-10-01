@@ -1,2 +1,2 @@
-# finance
-Portal financiero
+# Finance repository
+Portal financier

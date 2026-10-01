@@ -145,6 +145,11 @@ th{color:var(--muted);font:700 10.5px var(--font);letter-spacing:.08em;text-tran
 
 .note{font-size:12.5px;color:var(--muted);line-height:1.6;margin-top:18px;max-width:78ch}
 
+
+footer.app-foot{max-width:1100px;margin:0 auto;padding:0 20px 56px;font-size:12.5px;color:var(--muted)}
+footer.app-foot a{color:var(--gold);cursor:pointer;text-decoration:underline;text-underline-offset:3px}
+.sync-state{display:inline-block;margin-right:14px}
+.sync-state.on{color:var(--green)}
 /* Logo */
 .pf-mark{width:28px;height:28px;display:block;flex:none}
 .pf-mark.big{width:64px;height:64px;margin-bottom:10px;filter:drop-shadow(0 8px 18px var(--c1-soft))}
@@ -440,9 +445,9 @@ tbody tr td{transition:background-color .3s var(--ease)}
 
 /* ===== hipoteca: deslizadores alineados, chip de % y KPIs ===== */
 .pctrow{margin-top:12px;min-height:28px}
-.field .fchip{right:34px;bottom:50%;transform:translateY(50%);padding:3px 9px;border-radius:999px;background:var(--c1-soft);color:var(--gold);
+.field .fchip{right:30px;bottom:50%;transform:translateY(50%);padding:3px 9px;border-radius:999px;background:var(--c1-soft);color:var(--gold);
   font:600 12px var(--mono);font-variant-numeric:tabular-nums;line-height:1.4}
-.field:has(.fchip) input{padding-right:108px}
+.field:has(.fchip) input{padding-right:84px}
 .kpi.small{display:flex;flex-direction:column}
 .kpi.small .v{margin-top:auto;padding-top:8px}
 
@@ -508,7 +513,7 @@ footer.app-foot{display:flex;flex-wrap:wrap;align-items:center;gap:4px 18px}
 
 @media (min-width:1180px){
   .calc-layout{display:grid;grid-template-columns:minmax(0,1fr) 270px;gap:28px;align-items:start}
-  .calc-inputs .grid.g4{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .calc-inputs .grid.g4{grid-template-columns:repeat(4,minmax(0,1fr))}
   .calc-inputs .grid>div>label{height:2.7em;display:flex;align-items:flex-end;flex-wrap:wrap;column-gap:0;line-height:1.25;font-size:10.5px;letter-spacing:.05em}
   .live{position:sticky;top:calc(var(--navh,60px) + 20px);margin-top:68px;background:var(--card);border:1px solid var(--line);
     border-radius:var(--r);box-shadow:var(--shadow);padding:20px 20px 18px;display:grid;gap:16px}
@@ -537,6 +542,27 @@ footer.app-foot{display:flex;flex-wrap:wrap;align-items:center;gap:4px 18px}
   .live-go span{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 }
 @media (max-width:1179px) and (min-width:821px){ .live .extra{display:grid} }
+
+/* el botón del título de sección no debe alterar su altura: todas las primeras cajas empiezan igual */
+h2.sec .btn{margin-block:-6px}
+@media (pointer:coarse){ h2.sec .btn{margin-block:-11px} }
+@media (min-width:1180px){ .live{margin-top:72px} }
+
+/* ===== "?" de ayuda: mismo mecanismo en todas las etiquetas, centrado con las mayúsculas ===== */
+.nw{white-space:nowrap}
+.info{margin-left:3px;position:relative;top:-1.1px}
+/* etiquetas con altura reservada (2 líneas): el texto se apoya abajo, junto a su campo */
+@media (min-width:861px) and (max-width:1150px){
+  .g3>div>label,.g4>div>label,.g5>div>label{display:table-cell;vertical-align:bottom;height:calc(2.7em + 8px);padding-bottom:8px;margin:0}
+}
+@media (min-width:1180px){
+  .calc-inputs .grid>div>label{display:table-cell;vertical-align:bottom;height:calc(2.7em + 8px);padding-bottom:8px;margin:0}
+}
+
+/* títulos de cifras: siempre dos líneas reservadas, así todas las cifras de una fila quedan alineadas */
+.kpi.small .t{min-height:3em}
+/* en tableta la quinta cifra ocupa todo el ancho, como en móvil */
+@media (max-width:860px){ .g5>*:last-child:nth-child(odd){grid-column:1/-1} }
 </style>
 </head>
 <body>
@@ -588,7 +614,7 @@ footer.app-foot{display:flex;flex-wrap:wrap;align-items:center;gap:4px 18px}
     inp.value = shown;
   };
   /* porcentaje con hasta 2 decimales, sin ceros sobrantes */
-  window.PCTn = function(n){ return String(+(+n).toFixed(2)).replace(".", PFL.dec) + (PFL.lang === "en" ? "%" : " %"); };
+  window.PCTn = function(n){ return String(+(+n).toFixed(2)).replace(".", PFL.dec) + (PFL.lang === "en" ? "%" : "\u00a0%"); };
   window.PFRun = function(root, fn){
     if(!root || root.classList.contains("on")) { fn(); return; }
     if(pending.some(function(it){ return it.fn === fn; })) return;
@@ -596,7 +622,7 @@ footer.app-foot{display:flex;flex-wrap:wrap;align-items:center;gap:4px 18px}
     if(pending.length === 1) (window.requestIdleCallback ? function(f){ requestIdleCallback(f, {timeout: 1500}); } : function(f){ setTimeout(f, 400); })(flush);
   };
   window.PFFlush = flush;
-  window.PCT = function(n, d){ return isFinite(n) ? n.toFixed(d).replace(".", PFL.dec) + (PFL.lang === "en" ? "%" : " %") : "—"; };
+  window.PCT = function(n, d){ return isFinite(n) ? n.toFixed(d).replace(".", PFL.dec) + (PFL.lang === "en" ? "%" : "\u00a0%") : "—"; };
   function tx(str){
     if(!str || !/[A-Za-zÀ-ÿ]/.test(str)) return str;
     var m = /^(\s*)([\s\S]*?)(\s*)$/.exec(str), core = m[2].replace(/\s+/g, " ");
@@ -1639,7 +1665,7 @@ function drawChart(rows, L, totalInt){
 let pct = (+$("precio").value) ? (+$("entrada").value||0)/(+$("precio").value)*100 : 20;
 function showPct(){
   $("entradaPct").value = Math.min(90, Math.max(0, Math.round(pct)));
-  $("entradaPctVal").textContent = (Math.round(pct*10)/10).toString().replace(".", PFL.dec) + LG(" %", "%");
+  $("entradaPctVal").textContent = (Math.round(pct*10)/10).toString().replace(".", PFL.dec) + LG("\u00a0%", "%");
 }
 function entradaFromPct(){ $("entrada").value = Math.round((+$("precio").value||0)*pct/100); }
 showPct();
@@ -1717,7 +1743,7 @@ function calc(){
   $("aportado").textContent = fmt(last.contrib);
   $("intereses").textContent = fmt(last.int - gain*tax);
   $("mult").textContent = last.contrib ? "×" + (net/last.contrib).toFixed(2).replace(".", PFL.dec) : "—";
-  $("dup").textContent = r>0 ? (72/(r*100)).toFixed(1) + " " + T("años") : "—";
+  $("dup").textContent = r>0 ? (72/(r*100)).toFixed(1).replace(".", PFL.dec) + "\u00a0" + T("años") : "—";
 
   const tot = last.contrib + last.int || 1;
   $("bA").style.width = (last.contrib/tot*100)+"%"; $("bI").style.width = (last.int/tot*100)+"%";
@@ -2066,6 +2092,22 @@ calc();
   window.addEventListener("hashchange", function(){ setTimeout(req, 50); });
   document.addEventListener("click", function(){ setTimeout(req, 80); });
   req();
+})();
+</script>
+<script>(function(){
+  /* el "?" va unido a la última palabra: nunca baja solo a otra línea */
+  function glue(){
+    document.querySelectorAll(".info").forEach(function(b){
+      var t = b.previousSibling;
+      if(t && t.nodeType === 3 && !/ $/.test(t.data)) t.data = t.data.replace(/\s*$/, " ");
+      if(!b.parentNode.classList.contains("nw")){
+        var w = document.createElement("span"); w.className = "nw";
+        b.parentNode.insertBefore(w, b); w.appendChild(document.createTextNode("⁠")); w.appendChild(b);
+      }
+    });
+  }
+  glue();
+  window.addEventListener("pf-lang", function(){ setTimeout(glue, 0); });
 })();
 </script>
 

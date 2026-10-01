@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="color-scheme" content="light dark">
 <meta name="description" content="Calculadoras de hipoteca, alquiler e interés compuesto.">
 <title>Numo</title>
@@ -260,20 +260,94 @@ input[type=range]::-webkit-slider-thumb{transition:transform .15s}
 .pctrow input[type=range]{margin:0;flex:1;min-width:0}
 .pctrow b{font:600 12px var(--mono);white-space:nowrap;text-align:right;color:var(--gold)}
 
+/* ===== navegación v6 ===== */
+.portal-nav .in{gap:20px}
+.portal-nav .links{gap:2px}
+.prefs{position:relative;margin-left:4px}
+.prefs-btn{display:inline-flex;align-items:center;gap:6px;height:36px;padding:0 12px 0 10px;border-radius:999px;border:1px solid var(--line);
+  background:var(--card2);color:var(--text);font:600 12.5px var(--font);transition:border-color .3s var(--ease),background-color .3s var(--ease)}
+.prefs-btn svg{width:17px;height:17px;color:var(--muted);margin-right:2px}
+.prefs-btn .pv{min-width:12px;text-align:center}
+.prefs-btn .pv+.pv{padding-left:7px;border-left:1px solid var(--line)}
+.prefs.open .prefs-btn{border-color:var(--gold)}
+@media (hover:hover){.prefs-btn:hover{border-color:var(--gold2)}}
+.prefs-pop{position:absolute;right:0;top:calc(100% + 10px);width:280px;max-width:calc(100vw - 32px);background:var(--card);border:1px solid var(--line);
+  border-radius:16px;box-shadow:0 24px 48px -20px rgba(0,0,0,.45);padding:14px;display:grid;gap:14px;z-index:70;
+  opacity:0;visibility:hidden;transform:translateY(-6px) scale(.98);transform-origin:top right;
+  transition:opacity .25s var(--ease),transform .3s var(--ease),visibility 0s linear .3s}
+.prefs.open .prefs-pop{opacity:1;visibility:visible;transform:none;transition:opacity .25s var(--ease),transform .3s var(--ease),visibility 0s}
+.prow{display:grid;gap:7px}
+.pk{font-size:12px;font-weight:600;color:var(--muted)}
+.prow .seg{display:grid;grid-template-columns:1fr 1fr;width:100%}
+.prow .seg button{padding:8px 10px}
+.tabbar{display:none}
+@media (max-width:820px){
+  .portal-nav .links{display:none}
+  .portal-nav .in{flex-wrap:nowrap;padding-block:10px}
+  .tabbar{display:grid;grid-template-columns:repeat(4,1fr);position:fixed;left:0;right:0;bottom:0;z-index:60;
+    background:var(--nav-bg);-webkit-backdrop-filter:saturate(1.6) blur(18px);backdrop-filter:saturate(1.6) blur(18px);
+    border-top:1px solid var(--line);padding:6px 8px calc(6px + env(safe-area-inset-bottom))}
+  .tabbar a{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;min-height:50px;border-radius:12px;
+    color:var(--muted);text-decoration:none;font:600 11px var(--font);transition:color .3s var(--ease)}
+  .tabbar a svg{width:23px;height:23px;transition:transform .35s var(--ease)}
+  .tabbar a.on{color:var(--gold)}
+  .tabbar a.on svg{transform:translateY(-1px)}
+  body{padding-bottom:calc(68px + env(safe-area-inset-bottom))}
+}
+
+/* ===== inicio v6 ===== */
+.home{padding-top:clamp(40px,8vw,88px)}
+.home-hero h1{font-size:clamp(40px,7.2vw,76px);line-height:1.02;letter-spacing:-.045em;font-weight:800;margin:0;max-width:12ch}
+.home-hero p{font-size:clamp(15px,1.6vw,17px);color:var(--muted);max-width:46ch;margin:18px 0 0;line-height:1.55}
+.tools{list-style:none;margin:clamp(32px,5vw,52px) 0 0;padding:0;background:var(--card);border:1px solid var(--line);border-radius:22px;overflow:hidden}
+.tools li+li{border-top:1px solid var(--line)}
+.tool{display:grid;grid-template-columns:44px minmax(0,1fr) auto 160px 20px;align-items:center;gap:22px;padding:22px 24px;
+  color:var(--text);text-decoration:none;transition:background-color .35s var(--ease)}
+.tool-ico{width:44px;height:44px;border-radius:13px;display:grid;place-items:center;background:var(--c1-soft);color:var(--gold);
+  transition:background-color .35s var(--ease),color .35s var(--ease)}
+.tool-ico svg{width:22px;height:22px}
+.tool-txt{display:grid;gap:3px;min-width:0}
+.tool-t{font-weight:700;font-size:16.5px;letter-spacing:-.01em}
+.tool-d{color:var(--muted);font-size:13.5px}
+.tool-fig{display:grid;justify-items:end;gap:2px;text-align:right}
+.tool-fig .n{font:600 20px var(--mono);letter-spacing:-.02em;white-space:nowrap;font-variant-numeric:tabular-nums}
+.tool-fig .l{font-size:12px;color:var(--muted)}
+.spark{width:160px;height:48px;display:block;overflow:visible}
+.spark .sl{fill:none;stroke:var(--gold);stroke-width:2;vector-effect:non-scaling-stroke;stroke-linejoin:round;stroke-linecap:round}
+.spark .sa{fill:var(--c1-soft);stroke:none}
+.spark .sb{fill:var(--c1-soft);transition:fill .35s var(--ease)}
+.spark .sb.on{fill:var(--gold)}
+.tool .chev{width:18px;height:18px;color:var(--muted);transition:transform .35s var(--ease),color .35s var(--ease)}
+@media (hover:hover){
+  .tool:hover{background:var(--card2)}
+  .tool:hover .tool-ico{background:var(--gold);color:var(--on-accent)}
+  .tool:hover .chev{transform:translateX(3px);color:var(--gold)}
+}
+.tool:focus-visible{outline:2px solid var(--gold);outline-offset:-4px;border-radius:20px}
+.home-note{margin-top:28px;max-width:70ch}
+@media (max-width:820px){
+  .tool{grid-template-columns:40px minmax(0,1fr) 112px 18px;grid-template-areas:"i t t c" ". f s s";gap:12px 14px;padding:18px}
+  .tool-ico{grid-area:i;width:40px;height:40px;border-radius:12px}
+  .tool-txt{grid-area:t}
+  .tool .chev{grid-area:c}
+  .tool-fig{grid-area:f;justify-items:start;text-align:left;align-self:end}
+  .tool-fig .n{font-size:18px}
+  .spark{grid-area:s;width:100%;height:38px;align-self:end}
+}
+@media (max-width:360px){
+  .tool{grid-template-columns:36px minmax(0,1fr) 92px 16px;gap:10px 12px;padding:16px}
+  .tool-ico{width:36px;height:36px}
+}
+
 /* usabilidad */
 .info{white-space:nowrap;vertical-align:middle;margin-block:-3px}
-.cur-top{display:none}
-.cur-top button{min-width:38px;text-align:center}
 @media (max-width:820px){
-  .cur-top{display:inline-flex;margin-right:10px}
-  .menu-tools .cur-seg{display:none}
 }
 @media (min-width:861px) and (max-width:1150px){
   .g3>div>label,.g4>div>label,.g5>div>label{height:2.7em;font-size:10.5px;letter-spacing:.04em;line-height:1.25}
 }
 @media (pointer:coarse){
   .seg button{min-height:38px;padding:8px 16px}
-  .cur-top button{padding:8px 12px}
   .info{position:relative}
   .info::after{content:"";position:absolute;inset:-14px}
   .linkbtn{padding:14px 8px;margin:-14px -8px}
@@ -298,26 +372,25 @@ tbody tr td{transition:background-color .3s var(--ease)}
 </head>
 <body>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs><linearGradient id="pf-g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f6df9c"/><stop offset="1" stop-color="#c4932b"/></linearGradient><linearGradient id="pf-s" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".35"/><stop offset=".55" stop-color="#fff" stop-opacity="0"/></linearGradient><symbol id="pf-logo" viewBox="0 0 64 64"><rect width="64" height="64" rx="16" fill="url(#pf-g)"/><rect width="64" height="64" rx="16" fill="url(#pf-s)"/><path d="M19.5 47V19.5L43.5 44.5V24" fill="none" stroke="#1a1305" stroke-width="7.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="43.5" cy="17" r="6" fill="#fffaf0"/></symbol></defs></svg>
-<nav class="portal-nav"><div class="in">
+<nav class="portal-nav" aria-label="Principal"><div class="in">
   <a class="brand" href="#inicio" aria-label="Numo, ir al inicio"><svg class="pf-mark" aria-hidden="true"><use href="#pf-logo"/></svg>Numo</a>
-  <div class="seg cur-seg cur-top" role="group" aria-label="Moneda"><button type="button" class="on" data-c="€">€</button><button type="button" data-c="$">$</button></div>
-  <button class="burger" id="burger" type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="menu"><span></span><span></span><span></span></button>
-  <div class="menu" id="menu">
-    <div class="links">
-      <a href="#hipoteca" data-r="hipoteca">Hipoteca</a>
-      <a href="#alquiler" data-r="alquiler">Alquiler</a>
-      <a href="#interes" data-r="interes">Interés compuesto</a>
-    </div>
-    <div class="menu-tools">
-      <div class="seg lang-seg" role="group" aria-label="Idioma"><button type="button" data-l="es">ES</button><button type="button" data-l="en">EN</button></div>
-      <div class="seg cur-seg" role="group" aria-label="Moneda"><button type="button" class="on" data-c="€">€ EUR</button><button type="button" data-c="$">$ USD</button></div>
-      <div class="seg theme-seg" role="group" aria-label="Tema"><button type="button" data-t="light">Claro</button><button type="button" data-t="dark">Oscuro</button></div>
+  <div class="links">
+    <a href="#hipoteca" data-r="hipoteca">Hipoteca</a>
+    <a href="#alquiler" data-r="alquiler">Alquiler</a>
+    <a href="#interes" data-r="interes">Interés compuesto</a>
+  </div>
+  <div class="prefs" id="prefs">
+    <button type="button" class="prefs-btn" id="prefs-btn" aria-haspopup="true" aria-expanded="false" aria-controls="prefs-pop" aria-label="Preferencias"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 7h10M18 7h2M4 17h4M12 17h8"/><circle cx="16" cy="7" r="2"/><circle cx="10" cy="17" r="2"/></svg><span class="pv" id="pv-lang">ES</span><span class="pv" id="pv-cur">€</span></button>
+    <div class="prefs-pop" id="prefs-pop" role="group" aria-label="Preferencias">
+      <div class="prow"><span class="pk">Idioma</span><div class="seg lang-seg" role="group" aria-label="Idioma"><button type="button" data-l="es">Español</button><button type="button" data-l="en">English</button></div></div>
+      <div class="prow"><span class="pk">Moneda</span><div class="seg cur-seg" role="group" aria-label="Moneda"><button type="button" class="on" data-c="€">€ Euro</button><button type="button" data-c="$">$ Dólar</button></div></div>
+      <div class="prow"><span class="pk">Tema</span><div class="seg theme-seg" role="group" aria-label="Tema"><button type="button" data-t="light">Claro</button><button type="button" data-t="dark">Oscuro</button></div></div>
     </div>
   </div>
 </div></nav>
 <script>
 (function(){
-  var DICT = {"Inicio": "Home", "Hipoteca": "Mortgage", "Alquiler": "Rental", "Interés compuesto": "Compound interest", "Claro": "Light", "Oscuro": "Dark", "Idioma": "Language", "Moneda": "Currency", "Tema": "Theme", "Abrir menú": "Open menu", "Cerrar menú": "Close menu", "Qué significa": "What does this mean?", "Porcentaje del precio como entrada": "Down payment as % of price", "¿Qué quieres calcular hoy?": "What do you want to calculate today?", "Hipoteca, alquiler e interés compuesto en un solo sitio, con tus datos siempre a mano.": "Mortgage, rental and compound interest in one place, with your data always at hand.", "Calculadora de hipoteca": "Mortgage calculator", "Cuota mensual, intereses totales, gastos de compra, ratio de esfuerzo y cuadro de amortización con amortización extra.": "Monthly payment, total interest, purchase costs, affordability ratio and an amortization schedule with extra payments.", "Abrir →": "Open →", "Alquiler y rentabilidad": "Rental & returns", "Qué precio pedir y qué rentabilidad esperar según alquiler tradicional, vacacional o por habitaciones.": "What price to ask and what return to expect for a traditional, vacation or by-the-room rental.", "Proyecta tu capital con aportaciones periódicas, revalorización de la aportación e inflación para ver el valor real.": "Project your capital with regular contributions, growing deposits and inflation to see its real value.", "Son simulaciones orientativas: no incluyen toda la fiscalidad (IRPF, IVA, tasas locales) ni sustituyen el consejo de un asesor financiero o fiscal.": "These are indicative simulations: they do not include all taxes (income tax, VAT, local fees) and are no substitute for advice from a financial or tax adviser.", "Vivienda y financiación": "Property and financing", "Precio de la vivienda": "Property price", "Entrada / ahorros": "Down payment / savings", "Plazo (años)": "Term (years)", "años": "years", "Años": "Years", "Año": "Year", "Interés anual (TIN)": "Annual interest (nominal)", "Gastos de compra y extras": "Purchase costs and extras", "Impuesto (ITP / IVA+AJD)": "Tax (ITP / VAT+AJD)", "Cataluña: ITP 10% (segunda mano)": "Catalonia: 10% transfer tax (resale)", "Notaría, registro, gestoría": "Notary, registry, paperwork", "Amortización extra": "Extra repayment", "Cada mes. Reduce el plazo, no la cuota": "Every month. Shortens the term, not the payment", "Ingresos netos mensuales": "Net monthly income", "Para calcular el ratio de esfuerzo": "Used to calculate the affordability ratio", "Resultado": "Results", "En resumen": "Summary", "Cuota mensual": "Monthly payment", "Ratio de esfuerzo": "Affordability ratio", "Préstamo": "Loan", "Intereses totales": "Total interest", "Total a pagar": "Total to pay", "Gastos de compra": "Purchase costs", "Dinero inicial necesario": "Upfront cash needed", "Capital vs intereses": "Principal vs interest", "Capital": "Principal", "Intereses": "Interest", "Evolución de la deuda": "Debt over time", "Capital pendiente": "Remaining principal", "Intereses acumulados": "Accumulated interest", "Cuadro de amortización anual": "Annual amortization schedule", "Cuota pagada": "Paid", "Pendiente": "Remaining", "Calculadora de interés compuesto": "Compound interest calculator", "Parámetros": "Parameters", "Capital inicial": "Initial capital", "Aportación mensual": "Monthly contribution", "Rentabilidad anual": "Annual return", "Capitalización": "Compounding", "Mensual": "Monthly", "Anual": "Annual", "Aportación crece cada año": "Contribution grows each year", "Por ejemplo, subir tu aporte con el sueldo": "E.g. raising your contribution with your salary", "Inflación anual": "Annual inflation", "Para calcular el valor real": "Used to calculate the real value", "Impuesto sobre ganancias": "Tax on gains", "Aplicado al final (opcional)": "Applied at the end (optional)", "Valor final": "Final value", "Valor real (poder adquisitivo de hoy)": "Real value (today's purchasing power)", "Total aportado": "Total contributed", "Intereses generados": "Interest earned", "Multiplicador": "Multiplier", "Años para duplicar": "Years to double", "Regla del 72": "Rule of 72", "Aportado vs intereses": "Contributed vs interest", "Aportado": "Contributed", "Evolución del capital": "Capital over time", "Valor total": "Total value", "Año a año": "Year by year", "Valor real": "Real value", "Simulación orientativa con rentabilidad constante. Los rendimientos reales varían cada año y no están garantizados. El impuesto se aplica de forma simplificada sobre el total de ganancias al final.": "Indicative simulation with a constant return. Actual returns vary every year and are not guaranteed. Tax is applied in a simplified way on total gains at the end.", "↓ Importar de la hipoteca": "↓ Import from mortgage", "Inversión": "Investment", "Precio de compra": "Purchase price", "Impuestos, notaría, registro": "Taxes, notary, registry", "Reformas": "Renovations", "Mobiliario y equipamiento": "Furniture and equipment", "Préstamo hipotecario": "Mortgage loan", "0 si compras al contado": "0 if you pay cash", "Plazo": "Term", "Cuota hipoteca": "Mortgage payment", "Gastos fijos de la vivienda": "Fixed property costs", "IBI": "Property tax", "Comunidad": "Community fees", "Seguro": "Insurance", "Mantenimiento / averías": "Maintenance / repairs", "Tipo de alquiler": "Rental type", "Tradicional": "Traditional", "Vacacional": "Vacation", "Por habitaciones": "By the room", "Alquiler mensual": "Monthly rent", "Meses vacía al año": "Vacant months per year", "meses": "months", "Gestión / agencia": "Management / agency", "0 si lo gestionas tú": "0 if you manage it yourself", "Tarifa media por noche": "Average nightly rate", "Ocupación anual": "Annual occupancy", "Noches por estancia": "Nights per stay", "noches": "nights", "Coste de limpieza por estancia": "Cleaning cost per stay", "Comisión plataforma": "Platform fee", "Airbnb / Booking": "Airbnb / Booking", "Gestión profesional": "Professional management", "Suministros y extras": "Utilities and extras", "Luz, agua, internet, ropa de cama": "Electricity, water, internet, linen", "Nº de habitaciones": "Number of rooms", "hab.": "rooms", "Precio por habitación": "Price per room", "Ocupación": "Occupancy", "Suministros incluidos": "Utilities included", "Gestión": "Management", "Rentabilidad neta objetivo": "Target net return", "Sobre la inversión total": "On total investment", "Precio recomendado": "Recommended price", "Para tu rentabilidad objetivo": "For your target return", "Mínimo para no perder dinero": "Break-even minimum", "Cubre gastos y cuota de la hipoteca": "Covers costs and mortgage payment", "Rentabilidad con tus datos actuales": "Return with your current data", "Rentabilidad neta": "Net return", "Flujo de caja mensual": "Monthly cash flow", "Inversión total": "Total investment", "Ingresos anuales": "Annual income", "Gastos anuales": "Annual expenses", "Rentabilidad bruta": "Gross return", "Cash on cash": "Cash on cash", "Sobre tu dinero puesto": "On the cash you put in", "Comparativa de modalidades": "Comparison of rental types", "Modalidad": "Type", "Ingresos/año": "Income/year", "Beneficio neto": "Net profit", "Rent. bruta": "Gross ret.", "Rent. neta": "Net ret.", "Flujo/mes": "Cash flow/mo", "Precio para tu objetivo": "Price for your target", "La comparativa usa los datos introducidos en cada pestaña. Beneficio neto = ingresos menos gastos fijos y variables, antes de hipoteca e impuestos.": "The comparison uses the data entered in each tab. Net profit = income minus fixed and variable costs, before mortgage and taxes.", "Simulación orientativa: no incluye IRPF, IVA ni tasas. El alquiler vacacional exige licencia en muchas zonas (en Cataluña y otras comunidades hay restricciones), y la rentabilidad depende mucho de la ocupación real. Consulta con un asesor antes de decidir.": "Indicative simulation: it does not include income tax, VAT or fees. Vacation rentals require a licence in many areas (Catalonia and other regions have restrictions), and returns depend heavily on actual occupancy. Consult an adviser before deciding.", "Restablecer valores": "Reset values", "¿Seguro? Pulsa otra vez": "Sure? Click again", "Valores restablecidos": "Values reset", "Tipo de interés nominal: el interés anual que cobra el banco, sin contar comisiones. Cuanto menor sea, menos intereses pagas durante la vida del préstamo.": "Nominal interest rate: the yearly interest the bank charges, not counting fees. The lower it is, the less interest you pay over the life of the loan.", "Impuesto que se paga al comprar. En vivienda de segunda mano es el ITP y depende de la comunidad autónoma. En obra nueva se paga IVA más AJD.": "Tax paid when buying. For resale homes it is the transfer tax (ITP) and depends on the region. For new builds you pay VAT plus stamp duty (AJD).", "Dinero adicional que pagas cada mes además de la cuota. Se resta del capital pendiente, así que pagas menos intereses y terminas antes.": "Extra money you pay each month on top of the payment. It is deducted from the remaining principal, so you pay less interest and finish sooner.", "Lo que pagas cada mes al banco. Una parte devuelve capital y otra son intereses. Al principio pesan más los intereses.": "What you pay the bank each month. Part repays principal and part is interest. At the beginning interest weighs more.", "Qué parte de tus ingresos netos se va en la hipoteca. Por debajo del 30% se considera cómodo. Los bancos suelen poner el límite en torno al 35%.": "The share of your net income that goes to the mortgage. Below 30% is considered comfortable. Banks usually set the limit around 35%.", "Lo que debes tener ahorrado el día de la compra: la entrada más impuestos, notaría, registro y gestoría.": "What you need saved on purchase day: the down payment plus taxes, notary, registry and paperwork.", "Cada cuánto se suman los intereses al capital. Con capitalización mensual rinde algo más, porque los intereses empiezan a generar intereses antes.": "How often interest is added to the capital. Monthly compounding yields slightly more, because interest starts earning interest sooner.", "Subida media anual de los precios. Sirve para calcular cuánto valdría tu dinero final con el poder de compra de hoy.": "Average yearly price increase. Used to work out what your final money would be worth in today's purchasing power.", "El valor final expresado en euros de hoy. Si los precios suben, 100.000 € dentro de 20 años compran menos que ahora.": "The final value expressed in today's money. If prices rise, 100,000 in 20 years buys less than it does now.", "Cuántas veces recuperas lo que has aportado. Un ×2 significa que terminas con el doble de lo que pusiste.": "How many times you get back what you contributed. ×2 means you end with double what you put in.", "Regla del 72: divide 72 entre la rentabilidad anual y obtienes los años aproximados que tarda en duplicarse el capital.": "Rule of 72: divide 72 by the annual return to get the approximate years it takes for capital to double.", "Porcentaje de noches del año que la vivienda está alquilada. Un 60% equivale a unas 219 noches.": "Percentage of nights in the year the property is rented. 60% is about 219 nights.", "La rentabilidad neta que quieres conseguir. Con ella calculo el precio de alquiler que deberías pedir.": "The net return you want to achieve. It is used to calculate the rent you should ask for.", "Precio mínimo con el que los ingresos cubren todos los gastos y la cuota de la hipoteca. Por debajo de él, pierdes dinero cada mes.": "Minimum price at which income covers all costs and the mortgage payment. Below it, you lose money every month.", "Beneficio anual (ingresos menos gastos de la vivienda, antes de hipoteca e impuestos) dividido entre la inversión total. Es la cifra más realista.": "Annual profit (income minus property costs, before mortgage and taxes) divided by total investment. It is the most realistic figure.", "Dinero que te queda cada mes tras pagar gastos y la cuota de la hipoteca. Si es negativo, tienes que poner dinero de tu bolsillo.": "Money left each month after paying costs and the mortgage payment. If negative, you have to put in money from your own pocket.", "Precio de compra más gastos de compra, reformas y mobiliario.": "Purchase price plus purchase costs, renovations and furniture.", "Ingresos anuales divididos entre la inversión total, sin restar gastos. Sirve para comparar rápido, pero es optimista.": "Annual income divided by total investment, without subtracting costs. Good for a quick comparison, but optimistic.", "Lo que ganas al año, después de pagar la hipoteca, en relación con el dinero que has puesto de tu bolsillo. Mide lo que rinde tu capital propio.": "What you earn per year after paying the mortgage, relative to the money you put in from your own pocket. It measures the return on your own capital.", "% del precio": "% of price", "/mes de amortización extra": "/month of extra repayment", "Cómodo": "Comfortable", "Límite": "Borderline", "Alto": "High", "Alcanza tu objetivo": "Meets your target", "Sin hipoteca": "No mortgage", "Gráfico": "Chart", "Después de pagar la hipoteca (antes de impuestos)": "After paying the mortgage (before taxes)", "Sin hipoteca (antes de impuestos)": "No mortgage (before taxes)", "Los intereses ya superan lo que has puesto tú.": "Interest already exceeds what you put in.", "No necesitas financiación: tu entrada cubre el precio de la vivienda.": "You don't need financing: your down payment covers the property price.", "alquiler/mes": "rent/month", "por noche": "per night", "por habitación/mes": "per room/month", "en vivo": "live", "tipo de referencia": "reference rate", "/mes": "/month", "Numo, ir al inicio": "Numo, go to home", "Guardado solo en este navegador": "Saved only in this browser", "Sincronizado con tu cuenta": "Synced with your account", "No se pudo sincronizar. Se guarda en este navegador": "Could not sync. Saved in this browser", "Pulsa otra vez para borrar tus datos": "Click again to erase your data", "€/año": "€/year", "€/mes": "€/month", "$/año": "$/year", "$/mes": "$/month"};
+  var DICT = {"Inicio": "Home", "Hipoteca": "Mortgage", "Alquiler": "Rental", "Interés compuesto": "Compound interest", "Claro": "Light", "Oscuro": "Dark", "Idioma": "Language", "Moneda": "Currency", "Tema": "Theme", "Abrir menú": "Open menu", "Cerrar menú": "Close menu", "Qué significa": "What does this mean?", "Porcentaje del precio como entrada": "Down payment as % of price", "¿Qué quieres calcular hoy?": "What do you want to calculate today?", "Hipoteca, alquiler e interés compuesto en un solo sitio, con tus datos siempre a mano.": "Mortgage, rental and compound interest in one place, with your data always at hand.", "Calculadora de hipoteca": "Mortgage calculator", "Cuota mensual, intereses totales, gastos de compra, ratio de esfuerzo y cuadro de amortización con amortización extra.": "Monthly payment, total interest, purchase costs, affordability ratio and an amortization schedule with extra payments.", "Abrir →": "Open →", "Alquiler y rentabilidad": "Rental & returns", "Qué precio pedir y qué rentabilidad esperar según alquiler tradicional, vacacional o por habitaciones.": "What price to ask and what return to expect for a traditional, vacation or by-the-room rental.", "Proyecta tu capital con aportaciones periódicas, revalorización de la aportación e inflación para ver el valor real.": "Project your capital with regular contributions, growing deposits and inflation to see its real value.", "Son simulaciones orientativas: no incluyen toda la fiscalidad (IRPF, IVA, tasas locales) ni sustituyen el consejo de un asesor financiero o fiscal.": "These are indicative simulations: they do not include all taxes (income tax, VAT, local fees) and are no substitute for advice from a financial or tax adviser.", "Vivienda y financiación": "Property and financing", "Precio de la vivienda": "Property price", "Entrada / ahorros": "Down payment / savings", "Plazo (años)": "Term (years)", "años": "years", "Años": "Years", "Año": "Year", "Interés anual (TIN)": "Annual interest (nominal)", "Gastos de compra y extras": "Purchase costs and extras", "Impuesto (ITP / IVA+AJD)": "Tax (ITP / VAT+AJD)", "Cataluña: ITP 10% (segunda mano)": "Catalonia: 10% transfer tax (resale)", "Notaría, registro, gestoría": "Notary, registry, paperwork", "Amortización extra": "Extra repayment", "Cada mes. Reduce el plazo, no la cuota": "Every month. Shortens the term, not the payment", "Ingresos netos mensuales": "Net monthly income", "Para calcular el ratio de esfuerzo": "Used to calculate the affordability ratio", "Resultado": "Results", "En resumen": "Summary", "Cuota mensual": "Monthly payment", "Ratio de esfuerzo": "Affordability ratio", "Préstamo": "Loan", "Intereses totales": "Total interest", "Total a pagar": "Total to pay", "Gastos de compra": "Purchase costs", "Dinero inicial necesario": "Upfront cash needed", "Capital vs intereses": "Principal vs interest", "Capital": "Principal", "Intereses": "Interest", "Evolución de la deuda": "Debt over time", "Capital pendiente": "Remaining principal", "Intereses acumulados": "Accumulated interest", "Cuadro de amortización anual": "Annual amortization schedule", "Cuota pagada": "Paid", "Pendiente": "Remaining", "Calculadora de interés compuesto": "Compound interest calculator", "Parámetros": "Parameters", "Capital inicial": "Initial capital", "Aportación mensual": "Monthly contribution", "Rentabilidad anual": "Annual return", "Capitalización": "Compounding", "Mensual": "Monthly", "Anual": "Annual", "Aportación crece cada año": "Contribution grows each year", "Por ejemplo, subir tu aporte con el sueldo": "E.g. raising your contribution with your salary", "Inflación anual": "Annual inflation", "Para calcular el valor real": "Used to calculate the real value", "Impuesto sobre ganancias": "Tax on gains", "Aplicado al final (opcional)": "Applied at the end (optional)", "Valor final": "Final value", "Valor real (poder adquisitivo de hoy)": "Real value (today's purchasing power)", "Total aportado": "Total contributed", "Intereses generados": "Interest earned", "Multiplicador": "Multiplier", "Años para duplicar": "Years to double", "Regla del 72": "Rule of 72", "Aportado vs intereses": "Contributed vs interest", "Aportado": "Contributed", "Evolución del capital": "Capital over time", "Valor total": "Total value", "Año a año": "Year by year", "Valor real": "Real value", "Simulación orientativa con rentabilidad constante. Los rendimientos reales varían cada año y no están garantizados. El impuesto se aplica de forma simplificada sobre el total de ganancias al final.": "Indicative simulation with a constant return. Actual returns vary every year and are not guaranteed. Tax is applied in a simplified way on total gains at the end.", "↓ Importar de la hipoteca": "↓ Import from mortgage", "Inversión": "Investment", "Precio de compra": "Purchase price", "Impuestos, notaría, registro": "Taxes, notary, registry", "Reformas": "Renovations", "Mobiliario y equipamiento": "Furniture and equipment", "Préstamo hipotecario": "Mortgage loan", "0 si compras al contado": "0 if you pay cash", "Plazo": "Term", "Cuota hipoteca": "Mortgage payment", "Gastos fijos de la vivienda": "Fixed property costs", "IBI": "Property tax", "Comunidad": "Community fees", "Seguro": "Insurance", "Mantenimiento / averías": "Maintenance / repairs", "Tipo de alquiler": "Rental type", "Tradicional": "Traditional", "Vacacional": "Vacation", "Por habitaciones": "By the room", "Alquiler mensual": "Monthly rent", "Meses vacía al año": "Vacant months per year", "meses": "months", "Gestión / agencia": "Management / agency", "0 si lo gestionas tú": "0 if you manage it yourself", "Tarifa media por noche": "Average nightly rate", "Ocupación anual": "Annual occupancy", "Noches por estancia": "Nights per stay", "noches": "nights", "Coste de limpieza por estancia": "Cleaning cost per stay", "Comisión plataforma": "Platform fee", "Airbnb / Booking": "Airbnb / Booking", "Gestión profesional": "Professional management", "Suministros y extras": "Utilities and extras", "Luz, agua, internet, ropa de cama": "Electricity, water, internet, linen", "Nº de habitaciones": "Number of rooms", "hab.": "rooms", "Precio por habitación": "Price per room", "Ocupación": "Occupancy", "Suministros incluidos": "Utilities included", "Gestión": "Management", "Rentabilidad neta objetivo": "Target net return", "Sobre la inversión total": "On total investment", "Precio recomendado": "Recommended price", "Para tu rentabilidad objetivo": "For your target return", "Mínimo para no perder dinero": "Break-even minimum", "Cubre gastos y cuota de la hipoteca": "Covers costs and mortgage payment", "Rentabilidad con tus datos actuales": "Return with your current data", "Rentabilidad neta": "Net return", "Flujo de caja mensual": "Monthly cash flow", "Inversión total": "Total investment", "Ingresos anuales": "Annual income", "Gastos anuales": "Annual expenses", "Rentabilidad bruta": "Gross return", "Cash on cash": "Cash on cash", "Sobre tu dinero puesto": "On the cash you put in", "Comparativa de modalidades": "Comparison of rental types", "Modalidad": "Type", "Ingresos/año": "Income/year", "Beneficio neto": "Net profit", "Rent. bruta": "Gross ret.", "Rent. neta": "Net ret.", "Flujo/mes": "Cash flow/mo", "Precio para tu objetivo": "Price for your target", "La comparativa usa los datos introducidos en cada pestaña. Beneficio neto = ingresos menos gastos fijos y variables, antes de hipoteca e impuestos.": "The comparison uses the data entered in each tab. Net profit = income minus fixed and variable costs, before mortgage and taxes.", "Simulación orientativa: no incluye IRPF, IVA ni tasas. El alquiler vacacional exige licencia en muchas zonas (en Cataluña y otras comunidades hay restricciones), y la rentabilidad depende mucho de la ocupación real. Consulta con un asesor antes de decidir.": "Indicative simulation: it does not include income tax, VAT or fees. Vacation rentals require a licence in many areas (Catalonia and other regions have restrictions), and returns depend heavily on actual occupancy. Consult an adviser before deciding.", "Restablecer valores": "Reset values", "¿Seguro? Pulsa otra vez": "Sure? Click again", "Valores restablecidos": "Values reset", "Tipo de interés nominal: el interés anual que cobra el banco, sin contar comisiones. Cuanto menor sea, menos intereses pagas durante la vida del préstamo.": "Nominal interest rate: the yearly interest the bank charges, not counting fees. The lower it is, the less interest you pay over the life of the loan.", "Impuesto que se paga al comprar. En vivienda de segunda mano es el ITP y depende de la comunidad autónoma. En obra nueva se paga IVA más AJD.": "Tax paid when buying. For resale homes it is the transfer tax (ITP) and depends on the region. For new builds you pay VAT plus stamp duty (AJD).", "Dinero adicional que pagas cada mes además de la cuota. Se resta del capital pendiente, así que pagas menos intereses y terminas antes.": "Extra money you pay each month on top of the payment. It is deducted from the remaining principal, so you pay less interest and finish sooner.", "Lo que pagas cada mes al banco. Una parte devuelve capital y otra son intereses. Al principio pesan más los intereses.": "What you pay the bank each month. Part repays principal and part is interest. At the beginning interest weighs more.", "Qué parte de tus ingresos netos se va en la hipoteca. Por debajo del 30% se considera cómodo. Los bancos suelen poner el límite en torno al 35%.": "The share of your net income that goes to the mortgage. Below 30% is considered comfortable. Banks usually set the limit around 35%.", "Lo que debes tener ahorrado el día de la compra: la entrada más impuestos, notaría, registro y gestoría.": "What you need saved on purchase day: the down payment plus taxes, notary, registry and paperwork.", "Cada cuánto se suman los intereses al capital. Con capitalización mensual rinde algo más, porque los intereses empiezan a generar intereses antes.": "How often interest is added to the capital. Monthly compounding yields slightly more, because interest starts earning interest sooner.", "Subida media anual de los precios. Sirve para calcular cuánto valdría tu dinero final con el poder de compra de hoy.": "Average yearly price increase. Used to work out what your final money would be worth in today's purchasing power.", "El valor final expresado en euros de hoy. Si los precios suben, 100.000 € dentro de 20 años compran menos que ahora.": "The final value expressed in today's money. If prices rise, 100,000 in 20 years buys less than it does now.", "Cuántas veces recuperas lo que has aportado. Un ×2 significa que terminas con el doble de lo que pusiste.": "How many times you get back what you contributed. ×2 means you end with double what you put in.", "Regla del 72: divide 72 entre la rentabilidad anual y obtienes los años aproximados que tarda en duplicarse el capital.": "Rule of 72: divide 72 by the annual return to get the approximate years it takes for capital to double.", "Porcentaje de noches del año que la vivienda está alquilada. Un 60% equivale a unas 219 noches.": "Percentage of nights in the year the property is rented. 60% is about 219 nights.", "La rentabilidad neta que quieres conseguir. Con ella calculo el precio de alquiler que deberías pedir.": "The net return you want to achieve. It is used to calculate the rent you should ask for.", "Precio mínimo con el que los ingresos cubren todos los gastos y la cuota de la hipoteca. Por debajo de él, pierdes dinero cada mes.": "Minimum price at which income covers all costs and the mortgage payment. Below it, you lose money every month.", "Beneficio anual (ingresos menos gastos de la vivienda, antes de hipoteca e impuestos) dividido entre la inversión total. Es la cifra más realista.": "Annual profit (income minus property costs, before mortgage and taxes) divided by total investment. It is the most realistic figure.", "Dinero que te queda cada mes tras pagar gastos y la cuota de la hipoteca. Si es negativo, tienes que poner dinero de tu bolsillo.": "Money left each month after paying costs and the mortgage payment. If negative, you have to put in money from your own pocket.", "Precio de compra más gastos de compra, reformas y mobiliario.": "Purchase price plus purchase costs, renovations and furniture.", "Ingresos anuales divididos entre la inversión total, sin restar gastos. Sirve para comparar rápido, pero es optimista.": "Annual income divided by total investment, without subtracting costs. Good for a quick comparison, but optimistic.", "Lo que ganas al año, después de pagar la hipoteca, en relación con el dinero que has puesto de tu bolsillo. Mide lo que rinde tu capital propio.": "What you earn per year after paying the mortgage, relative to the money you put in from your own pocket. It measures the return on your own capital.", "% del precio": "% of price", "/mes de amortización extra": "/month of extra repayment", "Cómodo": "Comfortable", "Límite": "Borderline", "Alto": "High", "Alcanza tu objetivo": "Meets your target", "Sin hipoteca": "No mortgage", "Gráfico": "Chart", "Después de pagar la hipoteca (antes de impuestos)": "After paying the mortgage (before taxes)", "Sin hipoteca (antes de impuestos)": "No mortgage (before taxes)", "Los intereses ya superan lo que has puesto tú.": "Interest already exceeds what you put in.", "No necesitas financiación: tu entrada cubre el precio de la vivienda.": "You don't need financing: your down payment covers the property price.", "alquiler/mes": "rent/month", "por noche": "per night", "por habitación/mes": "per room/month", "en vivo": "live", "tipo de referencia": "reference rate", "/mes": "/month", "Principal": "Main", "Calculadoras": "Calculators", "Preferencias": "Preferences", "Interés": "Compound", "Español": "Español", "English": "English", "€ Euro": "€ Euro", "$ Dólar": "$ Dollar", "Tus números, claros.": "Your numbers, made clear.", "Hipoteca, alquiler e inversión calculados con tus propios datos. Cambia un valor y todo se recalcula al momento.": "Mortgage, rental and investment worked out with your own data. Change a value and everything updates instantly.", "Cuota, intereses, gastos de compra y amortización.": "Payment, interest, purchase costs and amortization.", "Qué precio pedir y cuánto rinde cada tipo de alquiler.": "What rent to ask and how much each rental type returns.", "Cómo crece tu dinero con aportaciones e inflación.": "How your money grows with contributions and inflation.", "cuota al mes": "monthly payment", "rentabilidad neta": "net return", "valor final": "final value", "Numo, ir al inicio": "Numo, go to home", "Guardado solo en este navegador": "Saved only in this browser", "Sincronizado con tu cuenta": "Synced with your account", "No se pudo sincronizar. Se guarda en este navegador": "Could not sync. Saved in this browser", "Pulsa otra vez para borrar tus datos": "Click again to erase your data", "€/año": "€/year", "€/mes": "€/month", "$/año": "$/year", "$/mes": "$/month"};
   var REV = {}; Object.keys(DICT).forEach(function(k){ REV[DICT[k]] = k; });
   var lang = "es";
   try { var sv = localStorage.getItem("portal-lang"); if(sv === "es" || sv === "en") lang = sv;
@@ -399,6 +472,12 @@ tbody tr td{transition:background-color .3s var(--ease)}
 })();
 </script>
 
+<nav class="tabbar" aria-label="Calculadoras">
+  <a href="#inicio" data-r="inicio"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="4" width="6.5" height="6.5" rx="1.6"/><rect x="13.5" y="4" width="6.5" height="6.5" rx="1.6"/><rect x="4" y="13.5" width="6.5" height="6.5" rx="1.6"/><rect x="13.5" y="13.5" width="6.5" height="6.5" rx="1.6"/></svg><span>Inicio</span></a>
+  <a href="#hipoteca" data-r="hipoteca"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11.5 12 4l9 7.5"/><path d="M5.5 10v9.5h13V10"/><path d="M10 19.5v-5h4v5"/></svg><span>Hipoteca</span></a>
+  <a href="#alquiler" data-r="alquiler"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="8" cy="15" r="4"/><path d="M11 12 20 3"/><path d="m16 7 3 3"/><path d="m14 9 2 2"/></svg><span>Alquiler</span></a>
+  <a href="#interes" data-r="interes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 17 9.5 10.5l4 4L21 7"/><path d="M15 7h6v6"/></svg><span>Interés</span></a>
+</nav>
 <script>
 (function(){
   var T = "portal-theme", r = document.documentElement;
@@ -535,34 +614,36 @@ tbody tr td{transition:background-color .3s var(--ease)}
 </script>
 
 <main id="app">
-<section class="page" id="page-inicio"><div class="wrap">
-  <div class="hero">
-    <h1>¿Qué quieres calcular hoy?</h1>
-    <p>Hipoteca, alquiler e interés compuesto en un solo sitio, con tus datos siempre a mano.</p>
+<section class="page" id="page-inicio"><div class="wrap home">
+  <div class="home-hero">
+    <h1>Tus números, claros.</h1>
+    <p>Hipoteca, alquiler e inversión calculados con tus propios datos. Cambia un valor y todo se recalcula al momento.</p>
   </div>
-
-  <div class="cards" style="margin-top:28px">
-    <a class="card-link" href="#hipoteca">
-      <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11.5 12 4l9 7.5"/><path d="M5.5 10v9.5h13V10"/><path d="M10 19.5v-5h4v5"/></svg></div>
-      <h3>Calculadora de hipoteca</h3>
-      <p>Cuota mensual, intereses totales, gastos de compra, ratio de esfuerzo y cuadro de amortización con amortización extra.</p>
-      <span class="go">Abrir →</span>
-    </a>
-    <a class="card-link" href="#alquiler">
-      <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="15" r="4"/><path d="M11 12 20 3"/><path d="m16 7 3 3"/><path d="m14 9 2 2"/></svg></div>
-      <h3>Alquiler y rentabilidad</h3>
-      <p>Qué precio pedir y qué rentabilidad esperar según alquiler tradicional, vacacional o por habitaciones.</p>
-      <span class="go">Abrir →</span>
-    </a>
-    <a class="card-link" href="#interes">
-      <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17 9.5 10.5l4 4L21 7"/><path d="M15 7h6v6"/></svg></div>
-      <h3>Interés compuesto</h3>
-      <p>Proyecta tu capital con aportaciones periódicas, revalorización de la aportación e inflación para ver el valor real.</p>
-      <span class="go">Abrir →</span>
-    </a>
-  </div>
-
-  <p class="note" style="margin-top:34px">Son simulaciones orientativas: no incluyen toda la fiscalidad (IRPF, IVA, tasas locales) ni sustituyen el consejo de un asesor financiero o fiscal.</p></div></section>
+  <ul class="tools">
+    <li><a class="tool" href="#hipoteca">
+      <span class="tool-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11.5 12 4l9 7.5"/><path d="M5.5 10v9.5h13V10"/><path d="M10 19.5v-5h4v5"/></svg></span>
+      <span class="tool-txt"><span class="tool-t">Hipoteca</span><span class="tool-d">Cuota, intereses, gastos de compra y amortización.</span></span>
+      <span class="tool-fig"><span class="n" data-fig="hipoteca">—</span><span class="l">cuota al mes</span></span>
+      <svg class="spark" data-spark="hipoteca" viewBox="0 0 160 48" preserveAspectRatio="none" aria-hidden="true"></svg>
+      <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg>
+    </a></li>
+    <li><a class="tool" href="#alquiler">
+      <span class="tool-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="8" cy="15" r="4"/><path d="M11 12 20 3"/><path d="m16 7 3 3"/><path d="m14 9 2 2"/></svg></span>
+      <span class="tool-txt"><span class="tool-t">Alquiler y rentabilidad</span><span class="tool-d">Qué precio pedir y cuánto rinde cada tipo de alquiler.</span></span>
+      <span class="tool-fig"><span class="n" data-fig="alquiler">—</span><span class="l">rentabilidad neta</span></span>
+      <svg class="spark" data-spark="alquiler" viewBox="0 0 160 48" preserveAspectRatio="none" aria-hidden="true"></svg>
+      <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg>
+    </a></li>
+    <li><a class="tool" href="#interes">
+      <span class="tool-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 17 9.5 10.5l4 4L21 7"/><path d="M15 7h6v6"/></svg></span>
+      <span class="tool-txt"><span class="tool-t">Interés compuesto</span><span class="tool-d">Cómo crece tu dinero con aportaciones e inflación.</span></span>
+      <span class="tool-fig"><span class="n" data-fig="interes">—</span><span class="l">valor final</span></span>
+      <svg class="spark" data-spark="interes" viewBox="0 0 160 48" preserveAspectRatio="none" aria-hidden="true"></svg>
+      <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg>
+    </a></li>
+  </ul>
+  <p class="note home-note">Son simulaciones orientativas: no incluyen toda la fiscalidad (IRPF, IVA, tasas locales) ni sustituyen el consejo de un asesor financiero o fiscal.</p>
+</div></section>
 <section class="page" id="page-hipoteca"><div class="wrap">
 
   <header class="top">
@@ -783,6 +864,77 @@ tbody tr td{transition:background-color .3s var(--ease)}
 </div></section>
 </main>
 
+<script>
+(function(){
+  function digits(t){ var s = String(t || "").replace(/[^\d\-]/g, ""); return s ? +s : NaN; }
+  function col(sel, i, pct){
+    var out = [];
+    document.querySelectorAll(sel).forEach(function(tr){
+      var td = tr.children[i]; if(!td) return;
+      var v = pct ? parseFloat(td.textContent) : digits(td.textContent);
+      if(isFinite(v)) out.push(v);
+    });
+    return out;
+  }
+  var W = 160, H = 48, P = 4;
+  function line(vals){
+    if(vals.length < 2) return "";
+    var mx = Math.max.apply(null, vals), mn = Math.min(0, Math.min.apply(null, vals)), rg = (mx - mn) || 1;
+    var pts = vals.map(function(v, i){ return [P + (W - 2*P)*i/(vals.length - 1), H - P - (H - 2*P)*(v - mn)/rg]; });
+    var d = pts.map(function(p, i){ return (i ? "L" : "M") + p[0].toFixed(1) + " " + p[1].toFixed(1); }).join(" ");
+    var a = d + " L" + pts[pts.length-1][0].toFixed(1) + " " + (H - P) + " L" + P + " " + (H - P) + " Z";
+    return '<path class="sa" d="' + a + '"/><path class="sl" d="' + d + '"/>';
+  }
+  function bars(vals){
+    if(!vals.length) return "";
+    var mx = Math.max.apply(null, vals.concat([0.01])), n = vals.length, gap = 10, bw = (W - 2*P - gap*(n - 1))/n, best = vals.indexOf(Math.max.apply(null, vals));
+    return vals.map(function(v, i){
+      var h = Math.max(3, (H - 2*P)*Math.max(v, 0)/mx);
+      return '<rect class="' + (i === best ? "sb on" : "sb") + '" x="' + (P + i*(bw + gap)).toFixed(1) + '" y="' + (H - P - h).toFixed(1) + '" width="' + bw.toFixed(1) + '" height="' + h.toFixed(1) + '" rx="3"/>';
+    }).join("");
+  }
+  function fig(k, id){ var s = document.getElementById(id), d = document.querySelector('[data-fig="' + k + '"]'); if(s && d) d.textContent = s.textContent.trim() || "—"; }
+  function spark(k, html){ var el = document.querySelector('[data-spark="' + k + '"]'); if(el) el.innerHTML = html; }
+  function refresh(){
+    fig("hipoteca", "h-cuota"); fig("alquiler", "a-neta"); fig("interes", "i-final");
+    spark("hipoteca", line(col("#h-tbody tr", 4)));
+    spark("interes", line(col("#i-tbody tr", 3)));
+    spark("alquiler", bars(col("#a-cmp tr", 4, true)));
+  }
+  window.__homeRefresh = refresh;
+  function later(){ setTimeout(refresh, 0); }
+  window.addEventListener("hashchange", later);
+  window.addEventListener("pf-lang", later);
+  window.addEventListener("pf-currency", later);
+  window.addEventListener("load", later);
+  document.addEventListener("input", function(){ clearTimeout(refresh._t); refresh._t = setTimeout(refresh, 250); }, true);
+  later();
+})();
+</script>
+<script>
+(function(){
+  var wrap = document.getElementById("prefs"), btn = document.getElementById("prefs-btn"), pop = document.getElementById("prefs-pop");
+  if(!wrap || !btn || !pop) return;
+  function set(open, focusBack){
+    wrap.classList.toggle("open", open);
+    btn.setAttribute("aria-expanded", open ? "true" : "false");
+    if(open){ var f = pop.querySelector("button.on") || pop.querySelector("button"); if(f) setTimeout(function(){ f.focus({preventScroll: true}); }, 30); }
+    else if(focusBack) btn.focus();
+  }
+  btn.addEventListener("click", function(e){ e.stopPropagation(); set(!wrap.classList.contains("open")); });
+  document.addEventListener("click", function(e){ if(wrap.classList.contains("open") && !(e.target.closest && e.target.closest("#prefs"))) set(false); });
+  document.addEventListener("keydown", function(e){ if(e.key === "Escape" && wrap.classList.contains("open")) set(false, true); });
+  window.addEventListener("hashchange", function(){ set(false); });
+  function paint(){
+    var l = document.getElementById("pv-lang"), c = document.getElementById("pv-cur");
+    if(l) l.textContent = (window.PFL && PFL.lang === "en") ? "EN" : "ES";
+    if(c) c.textContent = (window.PFC && PFC.cur) || "€";
+  }
+  window.addEventListener("pf-lang", paint);
+  window.addEventListener("pf-currency", function(){ setTimeout(paint, 0); });
+  paint(); setTimeout(paint, 0);
+})();
+</script>
 <footer class="app-foot"><span class="sync-state" id="sync-state"></span><button type="button" class="linkbtn" onclick="__resetPortal(this)">Restablecer valores</button></footer>
 
 <script>
@@ -1416,7 +1568,7 @@ calc();
     routes.forEach(function(k){
       document.getElementById("page-" + k).classList.toggle("on", k === r);
     });
-    document.querySelectorAll(".portal-nav .links a").forEach(function(a){
+    document.querySelectorAll(".portal-nav .links a, .tabbar a").forEach(function(a){
       var isOn = a.getAttribute("data-r") === r; a.classList.toggle("on", isOn);
       if(isOn) a.setAttribute("aria-current", "page"); else a.removeAttribute("aria-current");
     });

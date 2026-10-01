@@ -4,11 +4,11 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="color-scheme" content="light dark">
-<meta name="theme-color" content="#8f6212">
-<meta name="application-name" content="Portal Financiero">
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23201e1a'/%3E%3Cpath d='M13 44 28 29l8 8 15-18' fill='none' stroke='%23e8c36a' stroke-width='6' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M39 19h12v12' fill='none' stroke='%23e8c36a' stroke-width='6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
-<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23201e1a'/%3E%3Cpath d='M13 44 28 29l8 8 15-18' fill='none' stroke='%23e8c36a' stroke-width='6' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M39 19h12v12' fill='none' stroke='%23e8c36a' stroke-width='6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<meta name="description" content="Calculadoras de hipoteca, alquiler e interés compuesto.">
 <title>Portal Financiero</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NCA2NCI+CjxkZWZzPgo8bGluZWFyR3JhZGllbnQgaWQ9ImciIHgxPSIwIiB5MT0iMCIgeDI9IjEiIHkyPSIxIj48c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiNmNmRmOWMiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiNjNDkzMmIiLz48L2xpbmVhckdyYWRpZW50Pgo8bGluZWFyR3JhZGllbnQgaWQ9InMiIHgxPSIwIiB5MT0iMCIgeDI9IjAiIHkyPSIxIj48c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiNmZmYiIHN0b3Atb3BhY2l0eT0iLjM1Ii8+PHN0b3Agb2Zmc2V0PSIuNTUiIHN0b3AtY29sb3I9IiNmZmYiIHN0b3Atb3BhY2l0eT0iMCIvPjwvbGluZWFyR3JhZGllbnQ+CjwvZGVmcz4KPHJlY3Qgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiByeD0iMTYiIGZpbGw9InVybCgjZykiLz4KPHJlY3Qgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiByeD0iMTYiIGZpbGw9InVybCgjcykiLz4KPHJlY3QgeD0iMTQuNSIgeT0iMzYiIHdpZHRoPSI5IiBoZWlnaHQ9IjE0IiByeD0iMyIgZmlsbD0iIzFhMTMwNSIvPgo8cmVjdCB4PSIyNy41IiB5PSIyNyIgd2lkdGg9IjkiIGhlaWdodD0iMjMiIHJ4PSIzIiBmaWxsPSIjMWExMzA1Ii8+CjxyZWN0IHg9IjQwLjUiIHk9IjE1IiB3aWR0aD0iOSIgaGVpZ2h0PSIzNSIgcng9IjMiIGZpbGw9IiMxYTEzMDUiLz4KPC9zdmc+">
+<link rel="icon" type="image/png" sizes="32x32" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAFQElEQVR4nJRX22seRRQ/s9kEYxJiCDRe+CS3viQIiqJt4xWx+Q/6UiQVLCJiKb4piE8+qG8WBaUSwQeVIF4eSvtS8aEioTTxRaGJMaZY+lWDlSYxze6c49znzO5+oJssuzM7M+f8fud3zsyXQ+Xa2vhqVnSJFwjFJIhslJAGBBAQofmOiCDU07SJAMm1Vb9+QZSxbcaXNwnlurpXJO1+ePf9J89xe8K/0NWLt+/Q76cEdR0jogyMUQqGYpv06rqp/tH2MadI/2Ecr8eSm68HYLk7f3NAvLR//4lbwYGd376eoS74VEDW8ggMMtJPaR10iLxDnhGLnCwz3kGglCnW1k9A+QsWO3P3HHztQm4WyYo5oLyFVBhHkdEbjXs2InLAGJam8RicJfbdcDShwjunGhfE1tpnh0Xec1ZNEh6JYwuE81y7Ts6IRxxjLOsaIGCakSlzYT5RKbdncsjEcyowwghNavowIuWTKNJJ0vWDjTEiQ+6Qku3QdEZteE2gWUwAZidyZXxaiIzFTNpF9CDjqUUUmZAsGzAIjiM1DOi2gKANw4xrW9/0ujiRq7ljigwzUbHihJQit7FDyxCLZYgxRuZ2b5Vw9vwSXLv+N4zsG4DZx++Dnu7MgUKXUJ5lHM8Ji34IyAGk9tjH2HkeNOCQ1mLMsuLd02fg828WQ55fXr0Krxx/xjFGQTOOiWHFgIyIeUydci1yrgmsCNOiIZcdK79eA36trrdV1hVRG4xBrQ+lgcIgisgtE+hTL8RSuli6fJYySU2LzBUpdtlCVTrt8Hpgx+cRMabFJMSJkjyn4IRTd9CK1VDt0uMNA5iUc6s5VAyURcxrNViiE5zPa1mGmAmmgSBEzYSbT0wbwT7oVCwCo+gYJldhFQNlLDJc/cCQoc1jk5rO87WNP+D895fN+CcfGYex1jDbNxIPQJZ7IUX97bPNaKAWc4g0a4SCM6Em3bixDc+e/ARKaY3NLyzCl+8fhaHBXrcXcAe0wTLWE7LPMmgAZVB3kvcOqUEuWVsZWF2/HozrS7+vXdmEB/pHLOQKBaTC7GOuw2vWA+tMLuVeEmOZqJ2i+ilWNFCqrmlNFgZpPQt0CIsoaMUk31tMHUh2syTmKXLzHfX3Bgf0OirWVGXAGN1zGpOmagbGtQbi1ikrApSw+OMVePO9b6H95xaMDPfBqy8+Bg9O3wnN2WYXhboGY0UFSlNbtTOe537X8u35hYvGuL7am9vw8RdLoTo2eBArXMUFQgbOIHfOoM6CBuTeGSHSpey+L6GJAgqlu2bfbcUpcm8v98YJKKkH4fyXYokMNVjy82tf2J7B60uiAY7cOiWh6fLjOxqBJgrqyP1WnjciD0jqioYGZuynThqAJOY+q7y9jKRs843HIrft2UfHoa+32yzS15vD4ZlRs9j0xBBM3jvojBFMtgZhavwOM//ph++Cvtu67Bz1fOqhfRFUcogxNtpi47uX1YGUZsNvAESmAfeeMITJXkHc+YY8J6LKucFrzqxzLlN9ywE5Kzq+HY/klbb/TvHkxH/I2C03RU61jY6Wsyzb+wh1qaJUC1zVhOlJJmkbpzrnua2sktUZ9M5uyaw8nbWe+GBF9b5BFeS+HCfIA9L0sFLN804x50/18vqh5y+tZloso39tvqN6lqqVMCDFCiPUcH5oQM6Z8cjdvOWNobFT2rZxQBxZkKK7PKQGveWPLP8t5vj/Yq6Pt4Rv/9PTf/CIsmlsV3N25czRA2q7PiYkTqkyPaW6hlO1Y2Cmk9p5nqt7U/X/pFz6WZ2N5g8cv/QDt/cvAAAA//902UpTAAAABklEQVQDAJH1tX23lwvoAAAAAElFTkSuQmCC">
+<link rel="apple-touch-icon" href="data:image/png;base64,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">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;600;700;800&display=swap">
 <style>
@@ -69,8 +69,7 @@ body{margin:0;background-color:var(--bg);color:var(--text);
   backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
 .portal-nav .in{max-width:1100px;margin:0 auto;padding:12px 20px;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
 .portal-nav .brand{display:flex;align-items:center;gap:10px;color:var(--text);font-weight:800;letter-spacing:-.01em;text-decoration:none;font-size:15px;margin-right:auto}
-.portal-nav .brand-mark{width:30px;height:30px;border-radius:9px;background:var(--text);color:var(--gold);display:grid;place-items:center;flex:none;box-shadow:0 3px 10px rgba(40,34,20,.14)}
-.portal-nav .brand-mark svg{width:19px;height:19px;display:block}
+.portal-nav .brand i{width:10px;height:10px;border-radius:3px;background:var(--gold);transform:rotate(45deg);display:block}
 .portal-nav .links{display:flex;gap:2px;flex-wrap:wrap}
 .portal-nav .links a{color:var(--muted);text-decoration:none;font-size:13px;font-weight:600;padding:7px 14px;border-radius:999px;transition:color .15s,background .15s}
 .portal-nav .links a:hover{color:var(--text)}
@@ -165,17 +164,66 @@ footer.app-foot a{color:var(--gold);cursor:pointer;text-decoration:underline;tex
 .sync-state.on{color:var(--green)}
 
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+[hidden]{display:none!important}
+
+/* Logo */
+.pf-mark{width:28px;height:28px;display:block;flex:none}
+.pf-mark.big{width:64px;height:64px;margin-bottom:10px;filter:drop-shadow(0 8px 18px var(--c1-soft))}
+
+/* Ayuda contextual */
+.info{display:inline-grid;place-items:center;width:17px;height:17px;border-radius:50%;border:1px solid var(--line);background:var(--card2);
+  color:var(--muted);font:700 10px var(--font);margin-left:7px;padding:0;cursor:pointer;vertical-align:middle;text-transform:none;letter-spacing:0;transition:color .15s,border-color .15s}
+.info:hover,.info[aria-expanded="true"]{color:var(--gold);border-color:var(--gold)}
+.tipbox{position:fixed;z-index:100;max-width:min(300px,calc(100vw - 24px));background:var(--card);color:var(--text);border:1px solid var(--line);
+  border-radius:12px;padding:12px 14px;font-size:13px;line-height:1.55;font-weight:500;text-transform:none;letter-spacing:0;
+  box-shadow:0 12px 32px -8px rgba(0,0,0,.35)}
+
+/* Resumen en frase */
+.verdict{background:var(--c1-soft);border-radius:var(--r);padding:18px 22px;margin-bottom:14px}
+.verdict.first{margin-top:40px}
+.verdict .vl{font-size:11px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--gold);margin-bottom:6px}
+.verdict p{margin:0;font-size:15.5px;line-height:1.65;max-width:80ch}
+.verdict strong{font-weight:800}
+
+/* Gráficos */
+.chart{position:relative;width:100%}
+.chart svg{width:100%;height:auto;display:block;touch-action:pan-y;overflow:visible}
+.pf-hit{cursor:crosshair}
+.charttip{position:absolute;top:6px;z-index:5;pointer-events:none;background:var(--card);border:1px solid var(--line);border-radius:10px;
+  padding:9px 12px;font-size:12.5px;box-shadow:0 10px 26px -10px rgba(0,0,0,.4);white-space:nowrap}
+.charttip .tt{font-weight:800;margin-bottom:5px}
+.charttip .tr{display:flex;align-items:center;gap:8px;color:var(--muted);line-height:1.6}
+.charttip .tr b{margin-left:auto;padding-left:14px;color:var(--text);font-family:var(--mono);font-weight:500}
+.charttip .dot{width:8px;height:8px;border-radius:50%;flex:none}
+
+.hero h1{font-size:clamp(30px,5.2vw,48px);margin:8px 0 12px;max-width:none}
+.hero + .cards{margin-top:34px}
+
+/* Moneda y tipo de cambio */
+.rate-note{display:flex;align-items:center;gap:12px;flex-wrap:wrap;font-size:12.5px;color:var(--muted)}
+.rate-note b{color:var(--text);font-family:var(--mono);font-weight:500}
+.rate-note .live{display:inline-flex;align-items:center;gap:6px;color:var(--green)}
+.rate-note .live i{width:7px;height:7px;border-radius:50%;background:var(--green);display:block}
+.cur-seg button{padding:6px 12px}
+
+/* Entrada en porcentaje */
+.pctrow{display:flex;align-items:center;gap:12px;margin-top:10px}
+.pctrow input[type=range]{margin:0;flex:1;min-width:0}
+.pctrow b{font:600 12px var(--mono);white-space:nowrap;text-align:right;color:var(--gold)}
 </style>
 </head>
 <body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs><linearGradient id="pf-g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f6df9c"/><stop offset="1" stop-color="#c4932b"/></linearGradient><linearGradient id="pf-s" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".35"/><stop offset=".55" stop-color="#fff" stop-opacity="0"/></linearGradient><symbol id="pf-logo" viewBox="0 0 64 64"><rect width="64" height="64" rx="16" fill="url(#pf-g)"/><rect width="64" height="64" rx="16" fill="url(#pf-s)"/><rect x="14.5" y="36" width="9" height="14" rx="3" fill="#1a1305"/><rect x="27.5" y="27" width="9" height="23" rx="3" fill="#1a1305"/><rect x="40.5" y="15" width="9" height="35" rx="3" fill="#1a1305"/></symbol></defs></svg>
 <nav class="portal-nav"><div class="in">
-  <a class="brand" href="#inicio" aria-label="Portal Financiero — inicio"><span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17 9.5 10.5l4 4L21 7"/><path d="M15 7h6v6"/></svg></span><span>Portal Financiero</span></a>
+  <a class="brand" href="#inicio"><svg class="pf-mark" aria-hidden="true"><use href="#pf-logo"/></svg>Portal Financiero</a>
   <div class="links">
     <a href="#inicio" data-r="inicio">Inicio</a>
     <a href="#hipoteca" data-r="hipoteca">Hipoteca</a>
     <a href="#alquiler" data-r="alquiler">Alquiler</a>
-    <a href="#interes" data-r="interes">Interés compuesto</a>    
+    <a href="#interes" data-r="interes">Interés compuesto</a>
   </div>
+  <div class="seg cur-seg" role="group" aria-label="Moneda"><button type="button" class="on" data-c="€">€ EUR</button><button type="button" data-c="$">$ USD</button></div>
   <div class="seg theme-seg" role="group" aria-label="Tema"><button type="button" data-t="light">Claro</button><button type="button" data-t="dark">Oscuro</button></div>
 </div></nav>
 <script>
@@ -199,13 +247,125 @@ footer.app-foot a{color:var(--gold);cursor:pointer;text-decoration:underline;tex
   sync();
 })();
 </script>
+<script>
+(function(){
+  var box = null, cur = null;
+  function el(){ return box || (box = document.getElementById("tipbox")); }
+  function hide(){
+    var b = el(); if(!b) return;
+    b.hidden = true;
+    if(cur){ cur.setAttribute("aria-expanded", "false"); cur = null; }
+  }
+  document.addEventListener("click", function(e){
+    var t = e.target, btn = t && t.closest ? t.closest(".info") : null;
+    if(!btn){ if(!(t && t.closest && t.closest("#tipbox"))) hide(); return; }
+    e.preventDefault(); e.stopPropagation();
+    if(cur === btn){ hide(); return; }
+    hide();
+    var b = el(); cur = btn; btn.setAttribute("aria-expanded", "true");
+    b.textContent = btn.getAttribute("data-tip"); b.hidden = false;
+    var r = btn.getBoundingClientRect(), bw = b.offsetWidth, bh = b.offsetHeight;
+    var left = Math.min(Math.max(12, r.left + r.width/2 - bw/2), window.innerWidth - bw - 12);
+    var top = r.bottom + 8; if(top + bh > window.innerHeight - 8) top = Math.max(8, r.top - bh - 8);
+    b.style.left = left + "px"; b.style.top = top + "px";
+  });
+  document.addEventListener("keydown", function(e){ if(e.key === "Escape") hide(); });
+  window.addEventListener("scroll", hide, true);
+  window.addEventListener("hashchange", hide);
+})();
+</script>
+<script>
+(function(){
+  function nice(x){ var p = Math.pow(10, Math.floor(Math.log10(x))), m = x/p; return (m <= 1 ? 1 : m <= 2 ? 2 : m <= 2.5 ? 2.5 : m <= 5 ? 5 : 10) * p; }
+  function compact(n){
+    var a = Math.abs(n);
+    if(a >= 1e6) return (n/1e6).toFixed(a >= 1e7 ? 0 : 1).replace(/\.0$/, "") + " M";
+    if(a >= 1e3) return Math.round(n/1e3) + " k";
+    return String(Math.round(n));
+  }
+  function render(el){
+    var cfg = el._cfg; if(!cfg) return;
+    var W = Math.max(Math.round(el.clientWidth), 280), H = W < 520 ? 240 : 300;
+    var M = {l: 50, r: 16, t: 14, b: 40};
+    var N = cfg.x.length - 1, pw = W - M.l - M.r, ph = H - M.t - M.b;
+    var max = 1;
+    cfg.series.forEach(function(s){ s.values.forEach(function(v){ if(v > max) max = v; }); });
+    var step = nice(max/4), ticks = Math.ceil(max/step), top = step*ticks;
+    function xs(i){ return M.l + (N ? pw*i/N : 0); }
+    function ys(v){ return M.t + ph - ph*v/top; }
+    var h = "", k, i;
+    for(k = 0; k <= ticks; k++){
+      var y = ys(k*step);
+      h += '<line x1="'+M.l+'" x2="'+(W-M.r)+'" y1="'+y.toFixed(1)+'" y2="'+y.toFixed(1)+'" style="stroke:var(--line)" stroke-width="1"/>';
+      h += '<text x="'+(M.l-9)+'" y="'+(y+4).toFixed(1)+'" text-anchor="end" style="fill:var(--muted);font:11px var(--mono)">'+compact(k*step)+'</text>';
+    }
+    var every = Math.max(1, Math.ceil(N/(W < 520 ? 5 : 10)));
+    for(i = 0; i <= N; i += every){
+      h += '<text x="'+xs(i).toFixed(1)+'" y="'+(M.t+ph+18)+'" text-anchor="middle" style="fill:var(--muted);font:11px var(--mono)">'+cfg.x[i]+'</text>';
+    }
+    if(cfg.xTitle) h += '<text x="'+(M.l+pw/2)+'" y="'+(H-6)+'" text-anchor="middle" style="fill:var(--muted);font:600 11px var(--font)">'+cfg.xTitle+'</text>';
+    cfg.series.forEach(function(s){
+      var p = s.values.map(function(v, j){ return (j ? "L" : "M") + xs(j).toFixed(1) + "," + ys(v).toFixed(1); }).join(" ");
+      if(s.fill) h += '<path d="'+p+' L'+xs(N).toFixed(1)+','+ys(0).toFixed(1)+' L'+xs(0).toFixed(1)+','+ys(0).toFixed(1)+' Z" style="fill:'+s.fill+'"/>';
+      h += '<path d="'+p+'" style="fill:none;stroke:'+s.color+';stroke-width:2.4;stroke-linejoin:round;stroke-linecap:round"/>';
+      h += '<circle cx="'+xs(N).toFixed(1)+'" cy="'+ys(s.values[N]).toFixed(1)+'" r="4" style="fill:'+s.color+';stroke:var(--card);stroke-width:2"/>';
+    });
+    h += '<line class="pf-guide" y1="'+M.t+'" y2="'+(M.t+ph)+'" style="stroke:var(--muted);stroke-width:1;stroke-dasharray:3 3;display:none"/>';
+    cfg.series.forEach(function(s, j){ h += '<circle class="pf-dot" r="5" style="fill:'+s.color+';stroke:var(--card);stroke-width:2;display:none"/>'; });
+    h += '<rect class="pf-hit" x="'+M.l+'" y="'+M.t+'" width="'+pw+'" height="'+ph+'" style="fill:transparent"/>';
+    el.innerHTML = '<svg viewBox="0 0 '+W+' '+H+'" width="'+W+'" height="'+H+'" role="img" aria-label="'+(cfg.label || "Gráfico")+'">'+h+'</svg><div class="charttip" hidden></div>';
+
+    var svg = el.firstChild, tip = el.lastChild, guide = svg.querySelector(".pf-guide");
+    var dots = svg.querySelectorAll(".pf-dot"), hit = svg.querySelector(".pf-hit");
+    function show(ev){
+      var rect = svg.getBoundingClientRect(); if(!rect.width) return;
+      var sc = W/rect.width, px = (ev.clientX - rect.left)*sc;
+      var idx = N ? Math.round((px - M.l)/pw*N) : 0; idx = Math.max(0, Math.min(N, idx));
+      var x = xs(idx);
+      guide.setAttribute("x1", x); guide.setAttribute("x2", x); guide.style.display = "";
+      Array.prototype.forEach.call(dots, function(d, j){
+        d.setAttribute("cx", x); d.setAttribute("cy", ys(cfg.series[j].values[idx])); d.style.display = "";
+      });
+      tip.innerHTML = "";
+      var hd = document.createElement("div"); hd.className = "tt"; hd.textContent = (cfg.xPrefix || "Año") + " " + cfg.x[idx]; tip.appendChild(hd);
+      cfg.series.forEach(function(s){
+        var row = document.createElement("div"); row.className = "tr";
+        var dot = document.createElement("span"); dot.className = "dot"; dot.style.background = s.color;
+        var nm = document.createElement("span"); nm.textContent = s.name;
+        var val = document.createElement("b"); val.textContent = cfg.fmt(s.values[idx]);
+        row.appendChild(dot); row.appendChild(nm); row.appendChild(val); tip.appendChild(row);
+      });
+      tip.hidden = false;
+      var lp = x/sc, tw = tip.offsetWidth;
+      tip.style.left = (lp + 14 + tw > rect.width ? Math.max(0, lp - 14 - tw) : lp + 14) + "px";
+    }
+    function out(){ guide.style.display = "none"; Array.prototype.forEach.call(dots, function(d){ d.style.display = "none"; }); tip.hidden = true; }
+    hit.addEventListener("pointermove", show);
+    hit.addEventListener("pointerdown", show);
+    hit.addEventListener("pointerleave", out);
+  }
+  function attach(el){
+    if(el._ro || typeof ResizeObserver === "undefined") return;
+    el._w = el.clientWidth;
+    el._ro = new ResizeObserver(function(){
+      var w = el.clientWidth;
+      if(Math.abs(w - (el._w || 0)) > 1){ el._w = w; render(el); }
+    });
+    el._ro.observe(el);
+  }
+  window.PF = {
+    chart: function(el, cfg){ el._cfg = cfg; render(el); attach(el); },
+    renderAll: function(){ document.querySelectorAll(".chart").forEach(render); }
+  };
+  window.addEventListener("hashchange", function(){ setTimeout(window.PF.renderAll, 40); });
+})();
+</script>
 
 <main id="app">
 <section class="page" id="page-inicio"><div class="wrap">
   <div class="hero">
-    <div class="tag warn">Privado · tus números solo los ves tú</div>
-    <h1>Portal Financiero</h1>
-    <p>Calculadoras para decidir con números: cuánto te costará una hipoteca, cómo crecerá tu dinero y qué alquiler necesitas para que una vivienda sea rentable.</p>
+    <h1>¿Qué quieres calcular hoy?</h1>
+    <p>Hipoteca, alquiler e interés compuesto en un solo sitio, con tus datos siempre a mano.</p>
   </div>
 
   <div class="cards" style="margin-top:28px">
@@ -215,16 +375,16 @@ footer.app-foot a{color:var(--gold);cursor:pointer;text-decoration:underline;tex
       <p>Cuota mensual, intereses totales, gastos de compra, ratio de esfuerzo y cuadro de amortización con amortización extra.</p>
       <span class="go">Abrir →</span>
     </a>
-    <a class="card-link" href="#interes">
-      <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17 9.5 10.5l4 4L21 7"/><path d="M15 7h6v6"/></svg></div>
-      <h3>Interés compuesto</h3>
-      <p>Proyecta tu capital con aportaciones periódicas, revalorización de la aportación e inflación para ver el valor real.</p>
-      <span class="go">Abrir →</span>
-    </a>
     <a class="card-link" href="#alquiler">
       <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="15" r="4"/><path d="M11 12 20 3"/><path d="m16 7 3 3"/><path d="m14 9 2 2"/></svg></div>
       <h3>Alquiler y rentabilidad</h3>
       <p>Qué precio pedir y qué rentabilidad esperar según alquiler tradicional, vacacional o por habitaciones.</p>
+      <span class="go">Abrir →</span>
+    </a>
+    <a class="card-link" href="#interes">
+      <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17 9.5 10.5l4 4L21 7"/><path d="M15 7h6v6"/></svg></div>
+      <h3>Interés compuesto</h3>
+      <p>Proyecta tu capital con aportaciones periódicas, revalorización de la aportación e inflación para ver el valor real.</p>
       <span class="go">Abrir →</span>
     </a>
   </div>
@@ -234,7 +394,7 @@ footer.app-foot a{color:var(--gold);cursor:pointer;text-decoration:underline;tex
 
   <header class="top">
     <h1>Calculadora de hipoteca</h1>
-    <div class="seg" id="h-cur"><button class="on" data-c="€">€ EUR</button><button data-c="$">$ USD</button></div>
+    <div class="rate-note" data-rate-note></div>
   </header>
 
   <h2 class="sec"><b>01</b> Vivienda y financiación</h2>
@@ -242,9 +402,10 @@ footer.app-foot a{color:var(--gold);cursor:pointer;text-decoration:underline;tex
     <div class="grid g4">
       <div><label>Precio de la vivienda</label><div class="field"><input id="h-precio" type="number" value="250000" step="1000"><span class="cur">€</span></div></div>
       <div><label>Entrada / ahorros</label><div class="field"><input id="h-entrada" type="number" value="50000" step="1000"><span class="cur">€</span></div>
+        <div class="pctrow"><input type="range" id="h-entradaPct" min="0" max="90" step="1" value="20" aria-label="Porcentaje del precio como entrada"><b id="h-entradaPctVal">20%</b></div>
         <div class="hint" id="h-ltv"></div></div>
       <div><label>Plazo (años)</label><div class="field"><input id="h-anios" type="number" value="25" min="1" max="40"><span>años</span></div></div>
-      <div><label>Interés anual (TIN)</label><div class="field"><input id="h-tin" type="number" value="2.9" step="0.05"><span>%</span></div></div>
+      <div><label>Interés anual (TIN)<button type="button" class="info" aria-label="Qué significa" aria-expanded="false" data-tip="Tipo de interés nominal: el interés anual que cobra el banco, sin contar comisiones. Cuanto menor sea, menos intereses pagas durante la vida del préstamo.">?</button></label><div class="field"><input id="h-tin" type="number" value="2.9" step="0.05"><span>%</span></div></div>
     </div>
     <input type="range" id="h-slider" min="50000" max="1000000" step="5000" value="250000">
   </div>
@@ -252,24 +413,25 @@ footer.app-foot a{color:var(--gold);cursor:pointer;text-decoration:underline;tex
   <h2 class="sec"><b>02</b> Gastos de compra y extras</h2>
   <div class="panel">
     <div class="grid g4">
-      <div><label>Impuesto (ITP / IVA+AJD)</label><div class="field"><input id="h-itp" type="number" value="10" step="0.5"><span>%</span></div><div class="hint">Cataluña: ITP 10% (segunda mano)</div></div>
+      <div><label>Impuesto (ITP / IVA+AJD)<button type="button" class="info" aria-label="Qué significa" aria-expanded="false" data-tip="Impuesto que se paga al comprar. En vivienda de segunda mano es el ITP y depende de la comunidad autónoma. En obra nueva se paga IVA más AJD.">?</button></label><div class="field"><input id="h-itp" type="number" value="10" step="0.5"><span>%</span></div><div class="hint">Cataluña: ITP 10% (segunda mano)</div></div>
       <div><label>Notaría, registro, gestoría</label><div class="field"><input id="h-otros" type="number" value="3000" step="100"><span class="cur">€</span></div></div>
-      <div><label>Amortización extra mensual</label><div class="field"><input id="h-extra" type="number" value="0" step="50"><span class="cur">€</span></div><div class="hint">Reduce el plazo, no la cuota</div></div>
+      <div><label>Amortización extra<button type="button" class="info" aria-label="Qué significa" aria-expanded="false" data-tip="Dinero adicional que pagas cada mes además de la cuota. Se resta del capital pendiente, así que pagas menos intereses y terminas antes.">?</button></label><div class="field"><input id="h-extra" type="number" value="0" step="50"><span class="cur">€</span></div><div class="hint">Cada mes. Reduce el plazo, no la cuota</div></div>
       <div><label>Ingresos netos mensuales</label><div class="field"><input id="h-ingresos" type="number" value="3500" step="100"><span class="cur">€</span></div><div class="hint">Para calcular el ratio de esfuerzo</div></div>
     </div>
   </div>
 
   <h2 class="sec"><b>03</b> Resultado</h2>
+  <div class="verdict"><div class="vl">En resumen</div><p id="h-verdict"></p></div>
   <div class="grid g2">
-    <div class="kpi"><div class="t">Cuota mensual</div><div class="v gold" id="h-cuota">—</div><div class="s" id="h-cuotaSub"></div></div>
-    <div class="kpi"><div class="t">Ratio de esfuerzo</div><div class="v" id="h-esfuerzo">—</div><div class="s" id="h-esfuerzoSub"></div></div>
+    <div class="kpi"><div class="t">Cuota mensual<button type="button" class="info" aria-label="Qué significa" aria-expanded="false" data-tip="Lo que pagas cada mes al banco. Una parte devuelve capital y otra son intereses. Al principio pesan más los intereses.">?</button></div><div class="v gold" id="h-cuota">—</div><div class="s" id="h-cuotaSub"></div></div>
+    <div class="kpi"><div class="t">Ratio de esfuerzo<button type="button" class="info" aria-label="Qué significa" aria-expanded="false" data-tip="Qué parte de tus ingresos netos se va en la hipoteca. Por debajo del 30% se considera cómodo. Los bancos suelen poner el límite en torno al 35%.">?</button></div><div class="v" id="h-esfuerzo">—</div><div class="s" id="h-esfuerzoSub"></div></div>
   </div>
   <div class="grid g5" style="margin-top:14px">
     <div class="kpi small"><div class="t">Préstamo</div><div class="v" id="h-prestamo">—</div></div>
     <div class="kpi small"><div class="t">Intereses totales</div><div class="v red" id="h-intereses">—</div></div>
     <div class="kpi small"><div class="t">Total a pagar</div><div class="v" id="h-total">—</div></div>
     <div class="kpi small"><div class="t">Gastos de compra</div><div class="v" id="h-gastos">—</div></div>
-    <div class="kpi small"><div class="t">Dinero inicial necesario</div><div class="v gold" id="h-inicial">—</div></div>
+    <div class="kpi small"><div class="t">Dinero inicial necesario<button type="button" class="info" aria-label="Qué significa" aria-expanded="false" data-tip="Lo que debes tener ahorrado el día de la compra: la entrada más impuestos, notaría, registro y gestoría.">?</button></div><div class="v gold" id="h-inicial">—</div></div>
   </div>
 
   <div class="panel" style="margin-top:14px">
@@ -279,7 +441,7 @@ footer.app-foot a{color:var(--gold);cursor:pointer;text-decoration:underline;tex
   </div>
 
   <h2 class="sec"><b>04</b> Evolución de la deuda</h2>
-  <div class="panel"><svg id="h-chart" viewBox="0 0 900 300" preserveAspectRatio="none"></svg>
+  <div class="panel"><div class="chart" id="h-chart"></div>
     <div class="legend"><span><em style="background:var(--gold)"></em>Capital pendiente</span><span><em style="background:var(--red)"></em>Intereses acumulados</span></div></div>
 
   <h2 class="sec"><b>05</b> Cuadro de amortización anual</h2>
@@ -291,7 +453,7 @@ footer.app-foot a{color:var(--gold);cursor:pointer;text-decoration:underline;tex
 
   <header class="top">
     <h1>Calculadora de interés compuesto</h1>
-    <div class="seg" id="i-cur"><button class="on" data-c="€">€ EUR</button><button data-c="$">$ USD</button></div>
+    <div class="rate-note" data-rate-note></div>
   </header>
 
   <h2 class="sec"><b>01</b> Parámetros</h2>
@@ -303,23 +465,24 @@ footer.app-foot a{color:var(--gold);cursor:pointer;text-decoration:underline;tex
       <div><label>Rentabilidad anual</label><div class="field"><input id="i-rent" type="number" value="7" step="0.25"><span>%</span></div></div>
     </div>
     <div class="grid g4" style="margin-top:14px">
-      <div><label>Capitalización</label><div class="field"><select id="i-cap"><option value="m">Mensual</option><option value="a">Anual</option></select></div></div>
+      <div><label>Capitalización<button type="button" class="info" aria-label="Qué significa" aria-expanded="false" data-tip="Cada cuánto se suman los intereses al capital. Con capitalización mensual rinde algo más, porque los intereses empiezan a generar intereses antes.">?</button></label><div class="field"><select id="i-cap"><option value="m">Mensual</option><option value="a">Anual</option></select></div></div>
       <div><label>Aportación crece cada año</label><div class="field"><input id="i-crece" type="number" value="0" step="0.5"><span>%</span></div><div class="hint">Por ejemplo, subir tu aporte con el sueldo</div></div>
-      <div><label>Inflación anual</label><div class="field"><input id="i-infl" type="number" value="2.5" step="0.25"><span>%</span></div><div class="hint">Para calcular el valor real</div></div>
+      <div><label>Inflación anual<button type="button" class="info" aria-label="Qué significa" aria-expanded="false" data-tip="Subida media anual de los precios. Sirve para calcular cuánto valdría tu dinero final con el poder de compra de hoy.">?</button></label><div class="field"><input id="i-infl" type="number" value="2.5" step="0.25"><span>%</span></div><div class="hint">Para calcular el valor real</div></div>
       <div><label>Impuesto sobre ganancias</label><div class="field"><input id="i-imp" type="number" value="0" step="1"><span>%</span></div><div class="hint">Aplicado al final (opcional)</div></div>
     </div>
   </div>
 
   <h2 class="sec"><b>02</b> Resultado</h2>
+  <div class="verdict"><div class="vl">En resumen</div><p id="i-verdict"></p></div>
   <div class="grid g2">
     <div class="kpi"><div class="t">Valor final</div><div class="v gold" id="i-final">—</div><div class="s" id="i-finalSub"></div></div>
-    <div class="kpi"><div class="t">Valor real (poder adquisitivo de hoy)</div><div class="v" id="i-real">—</div><div class="s" id="i-realSub"></div></div>
+    <div class="kpi"><div class="t">Valor real (poder adquisitivo de hoy)<button type="button" class="info" aria-label="Qué significa" aria-expanded="false" data-tip="El valor final expresado en euros de hoy. Si los precios suben, 100.000 € dentro de 20 años compran menos que ahora.">?</button></div><div class="v" id="i-real">—</div><div class="s" id="i-realSub"></div></div>
   </div>
   <div class="grid g4" style="margin-top:14px">
     <div class="kpi small"><div class="t">Total aportado</div><div class="v" id="i-aportado">—</div></div>
     <div class="kpi small"><div class="t">Intereses generados</div><div class="v green" id="i-intereses">—</div></div>
-    <div class="kpi small"><div class="t">Multiplicador</div><div class="v" id="i-mult">—</div></div>
-    <div class="kpi small"><div class="t">Años para duplicar</div><div class="v" id="i-dup">—</div><div class="s">Regla del 72</div></div>
+    <div class="kpi small"><div class="t">Multiplicador<button type="button" class="info" aria-label="Qué significa" aria-expanded="false" data-tip="Cuántas veces recuperas lo que has aportado. Un ×2 significa que terminas con el doble de lo que pusiste.">?</button></div><div class="v" id="i-mult">—</div></div>
+    <div class="kpi small"><div class="t">Años para duplicar<button type="button" class="info" aria-label="Qué significa" aria-expanded="false" data-tip="Regla del 72: divide 72 entre la rentabilidad anual y obtienes los años aproximados que tarda en duplicarse el capital.">?</button></div><div class="v" id="i-dup">—</div><div class="s">Regla del 72</div></div>
   </div>
 
   <div class="panel" style="margin-top:14px">
@@ -329,7 +492,7 @@ footer.app-foot a{color:var(--gold);cursor:pointer;text-decoration:underline;tex
   </div>
 
   <h2 class="sec"><b>03</b> Evolución del capital</h2>
-  <div class="panel"><svg id="i-chart" viewBox="0 0 900 300" preserveAspectRatio="none"></svg>
+  <div class="panel"><div class="chart" id="i-chart"></div>
     <div class="legend"><span><em style="background:var(--gold)"></em>Total aportado</span><span><em style="background:var(--green)"></em>Valor total</span><span id="i-axis"></span></div></div>
 
   <h2 class="sec"><b>04</b> Año a año</h2>
@@ -343,7 +506,7 @@ footer.app-foot a{color:var(--gold);cursor:pointer;text-decoration:underline;tex
 
   <header class="top">
     <h1>Alquiler y rentabilidad</h1>
-    <div class="seg" id="a-cur"><button class="on" data-c="€">€ EUR</button><button data-c="$">$ USD</button></div>
+    <div class="rate-note" data-rate-note></div>
   </header>
 
   <h2 class="sec"><b>01</b> Inversión <button class="btn" id="a-import" type="button">↓ Importar de la hipoteca</button></h2>
@@ -356,7 +519,7 @@ footer.app-foot a{color:var(--gold);cursor:pointer;text-decoration:underline;tex
     </div>
     <div class="grid g4" style="margin-top:14px">
       <div><label>Préstamo hipotecario</label><div class="field"><input id="a-prestamo" type="number" value="100000" step="1000"><span class="cur">€</span></div><div class="hint">0 si compras al contado</div></div>
-      <div><label>Interés anual (TIN)</label><div class="field"><input id="a-tin" type="number" value="3" step="0.05"><span>%</span></div></div>
+      <div><label>Interés anual (TIN)<button type="button" class="info" aria-label="Qué significa" aria-expanded="false" data-tip="Tipo de interés nominal: el interés anual que cobra el banco, sin contar comisiones. Cuanto menor sea, menos intereses pagas durante la vida del préstamo.">?</button></label><div class="field"><input id="a-tin" type="number" value="3" step="0.05"><span>%</span></div></div>
       <div><label>Plazo</label><div class="field"><input id="a-anios" type="number" value="25" min="1" max="40"><span>años</span></div></div>
       <div><label>Cuota hipoteca</label><div class="kpi small" style="padding:10px 12px;border-radius:12px"><div class="v gold" id="a-cuota" style="margin:0;font-size:16px">—</div></div></div>
     </div>
@@ -389,7 +552,7 @@ footer.app-foot a{color:var(--gold);cursor:pointer;text-decoration:underline;tex
     <div class="mode" id="a-m-vac">
       <div class="grid g4">
         <div><label>Tarifa media por noche</label><div class="field"><input id="a-v_tarifa" type="number" value="95" step="5"><span class="cur">€</span></div></div>
-        <div><label>Ocupación anual</label><div class="field"><input id="a-v_ocup" type="number" value="60" step="1" min="0" max="100"><span>%</span></div></div>
+        <div><label>Ocupación anual<button type="button" class="info" aria-label="Qué significa" aria-expanded="false" data-tip="Porcentaje de noches del año que la vivienda está alquilada. Un 60% equivale a unas 219 noches.">?</button></label><div class="field"><input id="a-v_ocup" type="number" value="60" step="1" min="0" max="100"><span>%</span></div></div>
         <div><label>Noches por estancia</label><div class="field"><input id="a-v_est" type="number" value="3" step="0.5" min="1"><span>noches</span></div></div>
         <div><label>Coste de limpieza por estancia</label><div class="field"><input id="a-v_limp" type="number" value="40" step="5"><span class="cur">€</span></div></div>
       </div>
@@ -413,27 +576,28 @@ footer.app-foot a{color:var(--gold);cursor:pointer;text-decoration:underline;tex
     </div>
 
     <div class="grid g4" style="margin-top:20px">
-      <div><label>Rentabilidad neta objetivo</label><div class="field"><input id="a-objetivo" type="number" value="6" step="0.25"><span>%</span></div><div class="hint">Sobre la inversión total</div></div>
+      <div><label>Rentabilidad neta objetivo<button type="button" class="info" aria-label="Qué significa" aria-expanded="false" data-tip="La rentabilidad neta que quieres conseguir. Con ella calculo el precio de alquiler que deberías pedir.">?</button></label><div class="field"><input id="a-objetivo" type="number" value="6" step="0.25"><span>%</span></div><div class="hint">Sobre la inversión total</div></div>
     </div>
   </div>
 
+  <div class="verdict first"><div class="vl">En resumen</div><p id="a-verdict"></p></div>
   <h2 class="sec"><b>04</b> Precio recomendado</h2>
   <div class="grid g2">
     <div class="kpi"><div class="t" id="a-recT">Para tu rentabilidad objetivo</div><div class="v gold" id="a-rec">—</div><div class="s" id="a-recSub"></div></div>
-    <div class="kpi"><div class="t">Mínimo para no perder dinero</div><div class="v" id="a-min">—</div><div class="s" id="a-minSub">Cubre gastos y cuota de la hipoteca</div></div>
+    <div class="kpi"><div class="t">Mínimo para no perder dinero<button type="button" class="info" aria-label="Qué significa" aria-expanded="false" data-tip="Precio mínimo con el que los ingresos cubren todos los gastos y la cuota de la hipoteca. Por debajo de él, pierdes dinero cada mes.">?</button></div><div class="v" id="a-min">—</div><div class="s" id="a-minSub">Cubre gastos y cuota de la hipoteca</div></div>
   </div>
 
   <h2 class="sec"><b>05</b> Rentabilidad con tus datos actuales</h2>
   <div class="grid g2">
-    <div class="kpi"><div class="t">Rentabilidad neta</div><div class="v" id="a-neta">—</div><div class="s" id="a-netaSub"></div></div>
-    <div class="kpi"><div class="t">Flujo de caja mensual</div><div class="v" id="a-flujo">—</div><div class="s" id="a-flujoSub"></div></div>
+    <div class="kpi"><div class="t">Rentabilidad neta<button type="button" class="info" aria-label="Qué significa" aria-expanded="false" data-tip="Beneficio anual (ingresos menos gastos de la vivienda, antes de hipoteca e impuestos) dividido entre la inversión total. Es la cifra más realista.">?</button></div><div class="v" id="a-neta">—</div><div class="s" id="a-netaSub"></div></div>
+    <div class="kpi"><div class="t">Flujo de caja mensual<button type="button" class="info" aria-label="Qué significa" aria-expanded="false" data-tip="Dinero que te queda cada mes tras pagar gastos y la cuota de la hipoteca. Si es negativo, tienes que poner dinero de tu bolsillo.">?</button></div><div class="v" id="a-flujo">—</div><div class="s" id="a-flujoSub"></div></div>
   </div>
   <div class="grid g5" style="margin-top:14px">
-    <div class="kpi small"><div class="t">Inversión total</div><div class="v" id="a-inv">—</div></div>
+    <div class="kpi small"><div class="t">Inversión total<button type="button" class="info" aria-label="Qué significa" aria-expanded="false" data-tip="Precio de compra más gastos de compra, reformas y mobiliario.">?</button></div><div class="v" id="a-inv">—</div></div>
     <div class="kpi small"><div class="t">Ingresos anuales</div><div class="v" id="a-ing">—</div></div>
     <div class="kpi small"><div class="t">Gastos anuales</div><div class="v red" id="a-gas">—</div></div>
-    <div class="kpi small"><div class="t">Rentabilidad bruta</div><div class="v" id="a-bruta">—</div></div>
-    <div class="kpi small"><div class="t">Cash on cash</div><div class="v gold" id="a-coc">—</div><div class="s">Sobre tu dinero puesto</div></div>
+    <div class="kpi small"><div class="t">Rentabilidad bruta<button type="button" class="info" aria-label="Qué significa" aria-expanded="false" data-tip="Ingresos anuales divididos entre la inversión total, sin restar gastos. Sirve para comparar rápido, pero es optimista.">?</button></div><div class="v" id="a-bruta">—</div></div>
+    <div class="kpi small"><div class="t">Cash on cash<button type="button" class="info" aria-label="Qué significa" aria-expanded="false" data-tip="Lo que ganas al año, después de pagar la hipoteca, en relación con el dinero que has puesto de tu bolsillo. Mide lo que rinde tu capital propio.">?</button></div><div class="v gold" id="a-coc">—</div><div class="s">Sobre tu dinero puesto</div></div>
   </div>
 
   <h2 class="sec"><b>06</b> Comparativa de modalidades</h2>
@@ -454,14 +618,14 @@ footer.app-foot a{color:var(--gold);cursor:pointer;text-decoration:underline;tex
   try { s = JSON.parse(localStorage.getItem(K) || "{}"); } catch(e) {}
   var els = document.querySelectorAll("#app input, #app select");
   els.forEach(function(el){ if(el.id) init[el.id] = el.value; });
+  function persist(){ try { localStorage.setItem(K, JSON.stringify(s)); } catch(e) {} }
   els.forEach(function(el){
     if(!el.id) return;
     if(s[el.id] !== undefined) el.value = s[el.id];
     el.addEventListener("input", function(){
       if(applying) return;
       s[el.id] = el.value;
-      try { localStorage.setItem(K, JSON.stringify(s)); } catch(e) {}
-      queueSave();
+      persist(); queueSave();
     });
   });
 
@@ -470,6 +634,7 @@ footer.app-foot a{color:var(--gold);cursor:pointer;text-decoration:underline;tex
   status("Guardado solo en este navegador", false);
 
   function fire(el){ el.dispatchEvent(new Event("input", {bubbles:true})); }
+  function snapshot(){ els.forEach(function(el){ if(el.id) s[el.id] = el.value; }); }
   function applyValues(vals){
     applying = true;
     els.forEach(function(el){
@@ -477,8 +642,11 @@ footer.app-foot a{color:var(--gold);cursor:pointer;text-decoration:underline;tex
     });
     applying = false;
     s = Object.assign({}, vals);
-    try { localStorage.setItem(K, JSON.stringify(s)); } catch(e) {}
+    persist();
+    if(vals.__cur && window.PFC && window.PFC.cur !== vals.__cur){ window.PFC.set(vals.__cur, {convert:false}); }
   }
+  window.__pfGet = function(k){ return s[k]; };
+  window.__pfSet = function(k, v){ s[k] = v; snapshot(); persist(); queueSave(); };
 
   var docRef = null, timer = null, saving = false, dirty = false;
   function queueSave(){
@@ -500,7 +668,6 @@ footer.app-foot a{color:var(--gold);cursor:pointer;text-decoration:underline;tex
     });
   }
 
-  // Sincronización entre dispositivos (si el visor la ofrece)
   (async function(){
     try {
       if(!window.claude || !window.claude.use) return;
@@ -532,8 +699,53 @@ footer.app-foot a{color:var(--gold);cursor:pointer;text-decoration:underline;tex
     applyValues(init);
     s = {};
     try { localStorage.removeItem(K); } catch(e) {}
-    if(docRef){ dirty = true; s = {}; flush(); }
+    if(window.PFC){ window.PFC.set("€", {convert:false}); } else { snapshot(); persist(); queueSave(); }
   };
+})();
+</script>
+<script>
+(function(){
+  var desc = Object.getOwnPropertyDescriptor(HTMLInputElement.prototype, "value");
+  function group(x){ return x.replace(/\B(?=(\d{3})+(?!\d))/g, "."); }
+  function show(raw){
+    var n = parseFloat(raw);
+    if(raw === "" || raw == null || !isFinite(n)) return "";
+    var p = Math.abs(n).toFixed(2).split("."), f = p[1].replace(/0+$/, "");
+    return (n < 0 ? "-" : "") + group(p[0]) + (f ? "," + f : "");
+  }
+  document.querySelectorAll("#app .field").forEach(function(fd){
+    var sp = fd.querySelector("span.cur"), hid = fd.querySelector("input[type=number]");
+    if(!sp || !hid) return;
+    var lab = fd.parentNode.querySelector("label");
+    var vis = document.createElement("input");
+    vis.type = "text"; vis.inputMode = "decimal"; vis.autocomplete = "off"; vis.spellcheck = false;
+    if(lab && lab.childNodes[0]) vis.setAttribute("aria-label", lab.childNodes[0].textContent.trim());
+    vis.value = show(desc.get.call(hid));
+    hid.hidden = true;
+    hid.parentNode.insertBefore(vis, hid.nextSibling);
+    Object.defineProperty(hid, "value", {
+      configurable: true,
+      get: function(){ return desc.get.call(hid); },
+      set: function(v){ desc.set.call(hid, v); if(document.activeElement !== vis) vis.value = show(desc.get.call(hid)); }
+    });
+    vis.addEventListener("input", function(){
+      var raw = vis.value, caret = vis.selectionStart == null ? raw.length : vis.selectionStart;
+      var before = raw.slice(0, caret).replace(/[^\d,]/g, "").length;
+      var clean = raw.replace(/[^\d,]/g, ""), ci = clean.indexOf(",");
+      var ip = ci >= 0 ? clean.slice(0, ci) : clean;
+      var fp = ci >= 0 ? clean.slice(ci + 1).replace(/,/g, "").slice(0, 2) : null;
+      ip = ip.replace(/^0+(?=\d)/, "");
+      var shown = group(ip) + (fp !== null ? "," + fp : "");
+      vis.value = shown;
+      var pos = 0, cnt = 0;
+      while(pos < shown.length && cnt < before){ if(/[\d,]/.test(shown.charAt(pos))) cnt++; pos++; }
+      try { vis.setSelectionRange(pos, pos); } catch(e) {}
+      var num = (ip === "" && fp === null) ? "" : String(parseFloat((ip || "0") + (fp ? "." + fp : "")));
+      desc.set.call(hid, num);
+      hid.dispatchEvent(new Event("input", {bubbles: true}));
+    });
+    vis.addEventListener("blur", function(){ vis.value = show(desc.get.call(hid)); });
+  });
 })();
 </script>
 <script>(function(){
@@ -541,8 +753,8 @@ const ROOT = document.getElementById("page-hipoteca");
 
 const $ = id => document.getElementById("h-" + id);
 let cur = "€";
-const fmt = n => new Intl.NumberFormat("es-ES",{maximumFractionDigits:0}).format(n) + " " + cur;
-const fmt2 = n => new Intl.NumberFormat("es-ES",{minimumFractionDigits:2,maximumFractionDigits:2}).format(n) + " " + cur;
+const fmt = n => new Intl.NumberFormat("es-ES",{useGrouping:"always",maximumFractionDigits:0}).format(n) + " " + cur;
+const fmt2 = n => new Intl.NumberFormat("es-ES",{useGrouping:"always",minimumFractionDigits:2,maximumFractionDigits:2}).format(n) + " " + cur;
 
 function schedule(L, r, n, pago, extra){
   let bal = L, rows = [], m = 0, ints = 0;
@@ -607,35 +819,69 @@ function calc(){
   $("tbody").innerHTML = real.rows.map(x =>
     `<tr><td>${x.y}</td><td>${fmt(x.p)}</td><td>${fmt(x.c)}</td><td>${fmt(x.i)}</td><td>${fmt(x.bal)}</td></tr>`).join("");
 
+  (function(){
+    const ve = $("verdict");
+    if(!L){ ve.textContent = "No necesitas financiación: tu entrada cubre el precio de la vivienda."; return; }
+    const share = (L + totalInt) ? totalInt/(L + totalInt)*100 : 0;
+    let t = `Pagarás <strong>${fmt2(pago)}</strong> al mes durante <strong>${anios} años</strong>. En total devolverás ${fmt(L + totalInt)}, de los cuales <strong>${fmt(totalInt)}</strong> (${share.toFixed(0)}%) son intereses.`;
+    if(ingresos){
+      t += ratio <= 30 ? ` La cuota es el ${ratio.toFixed(1)}% de tus ingresos: una carga cómoda.`
+         : ratio <= 35 ? ` La cuota es el ${ratio.toFixed(1)}% de tus ingresos: está en el límite de lo recomendable.`
+         : ` La cuota es el ${ratio.toFixed(1)}% de tus ingresos: es alta y muchos bancos no la aprobarían.`;
+    }
+    if(extra > 0){
+      const saved = base.ints - real.ints, ms = base.months - real.months;
+      t += ` Con tu amortización extra ahorras ${fmt(saved)} y terminas ${Math.floor(ms/12)} años y ${ms%12} meses antes.`;
+    }
+    ve.innerHTML = t;
+  })();
   drawChart(real.rows, L, totalInt);
 }
 
 function drawChart(rows, L, totalInt){
-  const W=900,H=300,p=10, N=rows.length;
-  if(!N){$("chart").innerHTML="";return;}
-  const maxY = Math.max(L, totalInt, 1);
-  const x = i => p + (W-2*p) * (i/N);
-  const y = v => H-p - (H-2*p) * (v/maxY);
-  let bal = [`M${x(0)},${y(L)}`], itn = [`M${x(0)},${y(0)}`];
-  rows.forEach((r,i)=>{ bal.push(`L${x(i+1)},${y(r.bal)}`); itn.push(`L${x(i+1)},${y(r.cumInt)}`); });
-  const area = bal.join(" ") + ` L${x(N)},${y(0)} L${x(0)},${y(0)} Z`;
-  let grid = "";
-  for(let k=0;k<=4;k++){ const yy = p + (H-2*p)*k/4; grid += `<line x1="${p}" x2="${W-p}" y1="${yy}" y2="${yy}" style="stroke:var(--line)" stroke-width="1" vector-effect="non-scaling-stroke"/>`; }
-  $("chart").innerHTML = grid +
-    `<path d="${area}" style="fill:var(--c1-soft)"/>` +
-    `<path d="${bal.join(" ")}" fill="none" style="stroke:var(--gold)" stroke-width="2.5" vector-effect="non-scaling-stroke"/>` +
-    `<path d="${itn.join(" ")}" fill="none" style="stroke:var(--red)" stroke-width="2.5" vector-effect="non-scaling-stroke"/>`;
+  const xs = [0], bal = [L], itn = [0];
+  rows.forEach(r => { xs.push(r.y); bal.push(r.bal); itn.push(r.cumInt); });
+  PF.chart($("chart"), {x: xs, unit: cur, fmt: fmt, xTitle: "Años", label: "Capital pendiente e intereses acumulados por año",
+    series: [{name: "Capital pendiente", color: "var(--gold)", fill: "var(--c1-soft)", values: bal},
+             {name: "Intereses acumulados", color: "var(--red)", values: itn}]});
 }
 
 // eventos
+let pct = (+$("precio").value) ? (+$("entrada").value||0)/(+$("precio").value)*100 : 20;
+function showPct(){
+  $("entradaPct").value = Math.min(90, Math.max(0, Math.round(pct)));
+  $("entradaPctVal").textContent = (Math.round(pct*10)/10).toString().replace(".", ",") + "% del precio";
+}
+function entradaFromPct(){ $("entrada").value = Math.round((+$("precio").value||0)*pct/100); }
+showPct();
 ["precio","entrada","anios","tin","itp","otros","extra","ingresos"].forEach(id => $(id).addEventListener("input", () => {
-  if(id==="precio") $("slider").value = $("precio").value; calc(); }));
-$("slider").addEventListener("input", () => { $("precio").value = $("slider").value; calc(); });
-$("cur").addEventListener("click", e => {
-  if(e.target.tagName!=="BUTTON") return;
-  cur = e.target.dataset.c;
-  [...$("cur").children].forEach(b => b.classList.toggle("on", b===e.target));
-  ROOT.querySelectorAll(".cur").forEach(s => s.textContent = cur);
+  if(id==="precio"){ $("slider").value = $("precio").value; entradaFromPct(); }
+  if(id==="entrada"){ const pr = +$("precio").value||0; if(pr > 0){ pct = (+$("entrada").value||0)/pr*100; showPct(); } }
+  calc(); }));
+$("slider").addEventListener("input", () => { $("precio").value = $("slider").value; entradaFromPct(); calc(); });
+$("entradaPct").addEventListener("input", ev => {
+  pct = +$("entradaPct").value; showPct();
+  if(ev.isTrusted){ entradaFromPct(); calc(); }
+});
+window.addEventListener("pf-currency", function(ev){
+  const d = ev.detail || {}, f = d.factor || 1;
+  cur = d.cur;
+  ROOT.querySelectorAll(".field span.cur").forEach(s => { s.textContent = s.textContent.replace(/[€$]/, cur); });
+  if(f !== 1){
+    ROOT.querySelectorAll(".field").forEach(fd => {
+      const sp = fd.querySelector("span.cur"), inp = fd.querySelector("input");
+      if(!sp || !inp) return;
+      const v0 = parseFloat(inp.value); if(!isFinite(v0)) return;
+      const nv = v0*f; inp.value = Math.abs(nv) >= 100 ? Math.round(nv) : Math.round(nv*100)/100;
+    });
+  }
+  const sl = $("slider");
+  if(sl){
+    const k = cur === "$" ? (d.rate || 1) : 1;
+    sl.min = Math.round(50000*k/5000)*5000; sl.max = Math.round(1000000*k/50000)*50000;
+    sl.value = $("precio").value;
+  }
+  if(f !== 1 && window.__pfSet) window.__pfSet("__cur", cur);
   calc();
 });
 calc();
@@ -646,7 +892,7 @@ const ROOT = document.getElementById("page-interes");
 
 const $ = id => document.getElementById("i-" + id);
 let cur = "€";
-const fmt = n => new Intl.NumberFormat("es-ES",{maximumFractionDigits:0}).format(n) + " " + cur;
+const fmt = n => new Intl.NumberFormat("es-ES",{useGrouping:"always",maximumFractionDigits:0}).format(n) + " " + cur;
 
 function simulate(){
   const c0 = +$("inicial").value||0, a0 = +$("aport").value||0;
@@ -693,33 +939,41 @@ function calc(){
   $("tbody").innerHTML = rows.map(x =>
     `<tr><td>${x.y}</td><td>${fmt(x.contrib)}</td><td>${fmt(x.int)}</td><td>${fmt(x.bal)}</td><td>${fmt(x.real)}</td></tr>`).join("");
 
+  (function(){
+    const intNet = last.int - gain*tax;
+    const share = net ? intNet/net*100 : 0;
+    let t = `Aportando ${fmt(last.contrib)} en total durante <strong>${years} años</strong>, terminarás con <strong>${fmt(net)}</strong>. De esa cantidad, <strong>${fmt(intNet)}</strong> (${share.toFixed(0)}%) los habrá generado el propio dinero.`;
+    if(intNet > last.contrib) t += " Los intereses ya superan lo que has puesto tú.";
+    t += ` Descontando la inflación, equivaldría a ${fmt(realNet)} de hoy.`;
+    $("verdict").innerHTML = t;
+  })();
   draw(rows);
 }
 
 function draw(rows){
-  const W=900,H=300,p=10,N=rows.length;
-  const maxY = Math.max(...rows.map(r=>r.bal), 1);
-  const x = i => p + (W-2*p)*(i/N);
-  const y = v => H-p - (H-2*p)*(v/maxY);
-  const c0 = +$("inicial").value||0;
-  let top=[`M${x(0)},${y(c0)}`], low=[`M${x(0)},${y(c0)}`];
-  rows.forEach((r,i)=>{ top.push(`L${x(i+1)},${y(r.bal)}`); low.push(`L${x(i+1)},${y(r.contrib)}`); });
-  let grid="";
-  for(let k=0;k<=4;k++){const yy=p+(H-2*p)*k/4; grid+=`<line x1="${p}" x2="${W-p}" y1="${yy}" y2="${yy}" style="stroke:var(--line)" stroke-width="1" vector-effect="non-scaling-stroke"/>`;}
-  $("chart").innerHTML = grid +
-    `<path d="${top.join(" ")} L${x(N)},${y(0)} L${x(0)},${y(0)} Z" style="fill:var(--pos-soft)"/>` +
-    `<path d="${low.join(" ")} L${x(N)},${y(0)} L${x(0)},${y(0)} Z" style="fill:var(--c1-soft)"/>` +
-    `<path d="${top.join(" ")}" fill="none" style="stroke:var(--green)" stroke-width="2.5" vector-effect="non-scaling-stroke"/>` +
-    `<path d="${low.join(" ")}" fill="none" style="stroke:var(--gold)" stroke-width="2.5" vector-effect="non-scaling-stroke"/>`;
-  $("axis").textContent = "Máximo del gráfico: " + fmt(maxY);
+  const c0 = +$("inicial").value || 0;
+  const xs = [0], tot = [c0], con = [c0];
+  rows.forEach(r => { xs.push(r.y); tot.push(r.bal); con.push(r.contrib); });
+  PF.chart($("chart"), {x: xs, unit: cur, fmt: fmt, xTitle: "Años", label: "Valor total y total aportado por año",
+    series: [{name: "Valor total", color: "var(--green)", fill: "var(--pos-soft)", values: tot},
+             {name: "Total aportado", color: "var(--gold)", fill: "var(--c1-soft)", values: con}]});
+  $("axis").textContent = "";
 }
 
 ["inicial","aport","anios","rent","cap","crece","infl","imp"].forEach(id => $(id).addEventListener("input", calc));
-$("cur").addEventListener("click", e => {
-  if(e.target.tagName!=="BUTTON") return;
-  cur = e.target.dataset.c;
-  [...$("cur").children].forEach(b => b.classList.toggle("on", b===e.target));
-  ROOT.querySelectorAll(".cur").forEach(s => s.textContent = cur);
+window.addEventListener("pf-currency", function(ev){
+  const d = ev.detail || {}, f = d.factor || 1;
+  cur = d.cur;
+  ROOT.querySelectorAll(".field span.cur").forEach(s => { s.textContent = s.textContent.replace(/[€$]/, cur); });
+  if(f !== 1){
+    ROOT.querySelectorAll(".field").forEach(fd => {
+      const sp = fd.querySelector("span.cur"), inp = fd.querySelector("input");
+      if(!sp || !inp) return;
+      const v0 = parseFloat(inp.value); if(!isFinite(v0)) return;
+      const nv = v0*f; inp.value = Math.abs(nv) >= 100 ? Math.round(nv) : Math.round(nv*100)/100;
+    });
+  }
+  if(f !== 1 && window.__pfSet) window.__pfSet("__cur", cur);
   calc();
 });
 calc();
@@ -731,8 +985,8 @@ const ROOT = document.getElementById("page-alquiler");
 const $ = id => document.getElementById("a-" + id);
 const v = id => +$(id).value || 0;
 let cur = "€", mode = "trad";
-const fmt = n => new Intl.NumberFormat("es-ES",{maximumFractionDigits:0}).format(n) + " " + cur;
-const fmt2 = n => new Intl.NumberFormat("es-ES",{minimumFractionDigits:2,maximumFractionDigits:2}).format(n) + " " + cur;
+const fmt = n => new Intl.NumberFormat("es-ES",{useGrouping:"always",maximumFractionDigits:0}).format(n) + " " + cur;
+const fmt2 = n => new Intl.NumberFormat("es-ES",{useGrouping:"always",minimumFractionDigits:2,maximumFractionDigits:2}).format(n) + " " + cur;
 const pct = n => (isFinite(n) ? n.toFixed(2) : "—") + "%";
 
 const LABELS = {
@@ -825,6 +1079,18 @@ function calc(){
   });
   $("cmp").innerHTML = rows.map(x =>
     `<tr class="${x.m===bestM?'row-hl':''}"><td>${LABELS[x.m].name}${x.m===bestM?' <span class="best">★</span>':''}</td><td>${fmt(x.ing)}</td><td>${fmt(x.noi)}</td><td>${pct(x.br)}</td><td>${pct(x.nt)}</td><td class="${x.fl>=0?'green':'red'}">${fmt(x.fl)}</td><td>${x.pr}</td></tr>`).join("");
+  (function(){
+    const names = {trad:"el alquiler tradicional", vac:"el alquiler vacacional", hab:"el alquiler por habitaciones"};
+    const best = rows.find(x => x.m === bestM), obj = v("objetivo");
+    let t = `Con tus datos, <strong>${names[mode]}</strong> rinde un <strong>${neta.toFixed(2)}% neto</strong>` +
+      (neta >= obj ? `, por encima de tu objetivo del ${obj}%.` : `, por debajo de tu objetivo del ${obj}%.`);
+    t += bestM === mode ? " Es la modalidad que más rinde de las tres."
+      : ` La que más rinde es ${names[bestM]} (${best.nt.toFixed(2)}%), aunque suele exigir más gestión y depende de la ocupación.`;
+    t += flujo >= 0
+      ? ` Después de ${L ? "gastos y cuota de la hipoteca" : "gastos"} te quedan <strong>${fmt(flujo)} al mes</strong>.`
+      : ` Te faltarían <strong>${fmt(-flujo)} al mes</strong> para cubrir gastos${L ? " y la cuota de la hipoteca" : ""}.`;
+    $("verdict").innerHTML = t;
+  })();
 }
 
 ROOT.querySelectorAll("input,select").forEach(i => i.addEventListener("input", calc));
@@ -835,16 +1101,80 @@ $("tabs").addEventListener("click", e => {
   ROOT.querySelectorAll(".mode").forEach(d => d.classList.toggle("on", d.id==="a-m-"+mode));
   calc();
 });
-$("cur").addEventListener("click", e => {
-  if(e.target.tagName!=="BUTTON") return;
-  cur = e.target.dataset.c;
-  [...$("cur").children].forEach(b => b.classList.toggle("on", b===e.target));
-  ROOT.querySelectorAll(".cur").forEach(s => s.textContent = s.textContent.replace(/[€$]/, cur));
+window.addEventListener("pf-currency", function(ev){
+  const d = ev.detail || {}, f = d.factor || 1;
+  cur = d.cur;
+  ROOT.querySelectorAll(".field span.cur").forEach(s => { s.textContent = s.textContent.replace(/[€$]/, cur); });
+  if(f !== 1){
+    ROOT.querySelectorAll(".field").forEach(fd => {
+      const sp = fd.querySelector("span.cur"), inp = fd.querySelector("input");
+      if(!sp || !inp) return;
+      const v0 = parseFloat(inp.value); if(!isFinite(v0)) return;
+      const nv = v0*f; inp.value = Math.abs(nv) >= 100 ? Math.round(nv) : Math.round(nv*100)/100;
+    });
+  }
+  if(f !== 1 && window.__pfSet) window.__pfSet("__cur", cur);
   calc();
 });
 calc();
 
 })();</script>
+<script>
+(function(){
+  var FALLBACK = {rate: 1.1356, label: "30 sep"};
+  var PFC = window.PFC = {cur: "€", rate: FALLBACK.rate, live: false, when: null};
+  function two(n){ return (n < 10 ? "0" : "") + n; }
+  function paintNote(){
+    var t = '<span>1 € = <b>' + PFC.rate.toFixed(4).replace(".", ",") + ' $</b></span>';
+    t += PFC.live ? '<span class="live"><i></i>en vivo · ' + two(PFC.when.getHours()) + ':' + two(PFC.when.getMinutes()) + '</span>'
+                  : '<span>tipo de referencia · ' + FALLBACK.label + '</span>';
+    document.querySelectorAll("[data-rate-note]").forEach(function(el){ el.innerHTML = t; });
+  }
+  function paintToggle(){
+    document.querySelectorAll(".cur-seg button").forEach(function(b){ b.classList.toggle("on", b.getAttribute("data-c") === PFC.cur); });
+  }
+  PFC.set = function(c, opts){
+    opts = opts || {};
+    if(c !== "€" && c !== "$") return;
+    var prev = PFC.cur; PFC.cur = c;
+    var factor = 1;
+    if(opts.convert !== false && prev !== c) factor = (c === "$") ? PFC.rate : 1/PFC.rate;
+    window.dispatchEvent(new CustomEvent("pf-currency", {detail: {cur: c, factor: factor, rate: PFC.rate}}));
+    paintToggle();
+    if(window.__pfSet) window.__pfSet("__cur", c);
+  };
+  document.querySelectorAll(".cur-seg button").forEach(function(b){
+    b.addEventListener("click", function(){ PFC.set(b.getAttribute("data-c")); });
+  });
+
+  var sources = [
+    {u: "https://api.frankfurter.dev/v1/latest?base=EUR&symbols=USD"},
+    {u: "https://open.er-api.com/v6/latest/EUR"}
+  ];
+  function load(){
+    if(typeof fetch === "undefined") return;
+    (function next(i){
+      if(i >= sources.length) return;
+      var ctl = typeof AbortController !== "undefined" ? new AbortController() : null;
+      var to = setTimeout(function(){ if(ctl) ctl.abort(); }, 6000);
+      fetch(sources[i].u, {cache: "no-store", signal: ctl ? ctl.signal : undefined})
+        .then(function(r){ return r.json(); })
+        .then(function(j){
+          clearTimeout(to);
+          var r = j && j.rates ? +j.rates.USD : 0;
+          if(r > 0.3 && r < 3){ PFC.rate = r; PFC.live = true; PFC.when = new Date(); paintNote(); } else next(i + 1);
+        })
+        .catch(function(){ clearTimeout(to); next(i + 1); });
+    })(0);
+  }
+  paintNote(); paintToggle();
+  var saved = window.__pfGet ? window.__pfGet("__cur") : null;
+  if(saved === "$") PFC.set("$", {convert: false});
+  load();
+  setInterval(load, 300000);
+  document.addEventListener("visibilitychange", function(){ if(!document.hidden) load(); });
+})();
+</script>
 <script>
 (function(){
   var routes = ["inicio","hipoteca","interes","alquiler"];
@@ -878,5 +1208,6 @@ calc();
   });
 })();
 </script>
+<div class="tipbox" id="tipbox" role="tooltip" hidden></div>
 </body>
 </html>

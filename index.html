@@ -428,6 +428,12 @@ tbody tr td{transition:background-color .3s var(--ease)}
   body{padding-bottom:calc(92px + env(safe-area-inset-bottom))}
 }
 
+/* ===== barra superior: logo | secciones centradas | ajustes ===== */
+.portal-nav .in{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:16px}
+.portal-nav .brand{grid-column:1;justify-self:start;margin-right:0;padding:4px;border-radius:12px}
+.portal-nav .brand .pf-mark{width:32px;height:32px}
+.portal-nav .links{grid-column:2;justify-self:center}
+.prefs{grid-column:3;justify-self:end;margin-left:0}
 /* ===== inicio: ilustración y titular ===== */
 .hero-grid{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(280px,.9fr);gap:clamp(24px,4vw,56px);align-items:center}
 .hero-art-wrap{display:flex;justify-content:flex-end}
@@ -479,7 +485,7 @@ tbody tr td{transition:background-color .3s var(--ease)}
 <body>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs><linearGradient id="pf-g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f6df9c"/><stop offset="1" stop-color="#c4932b"/></linearGradient><linearGradient id="pf-s" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".35"/><stop offset=".55" stop-color="#fff" stop-opacity="0"/></linearGradient><symbol id="pf-logo" viewBox="0 0 64 64"><rect width="64" height="64" rx="16" fill="url(#pf-g)"/><rect width="64" height="64" rx="16" fill="url(#pf-s)"/><path d="M19.5 47V19.5L43.5 44.5V24" fill="none" stroke="#1a1305" stroke-width="7.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="43.5" cy="17" r="6" fill="#fffaf0"/></symbol></defs></svg>
 <nav class="portal-nav" aria-label="Principal"><div class="in">
-  <a class="brand" href="#inicio" aria-label="Numo, ir al inicio"><svg class="pf-mark" aria-hidden="true"><use href="#pf-logo"/></svg>Numo</a>
+  <a class="brand" href="#inicio" aria-label="Numo, ir al inicio"><svg class="pf-mark" aria-hidden="true"><use href="#pf-logo"/></svg></a>
   <div class="links">
     <a href="#hipoteca" data-r="hipoteca">Hipoteca</a>
     <a href="#alquiler" data-r="alquiler">Alquiler</a>
@@ -1065,7 +1071,7 @@ tbody tr td{transition:background-color .3s var(--ease)}
               ["alquiler", "a-neta",  function(){ return bars(col("#a-cmp tr", 4, true)); }, true],
               ["interes",  "i-final", function(){ return line(col("#i-tbody tr", 3)); }, false]];
   var shown = {}, intro = false;
-  function visible(){ var pg = document.getElementById("page-inicio"); return !!(pg && pg.classList.contains("on")); }
+  function visible(){ var pg = document.getElementById("page-inicio"); return !!(pg && pg.classList.contains("on")) && document.visibilityState !== "hidden" && !!window.__heroGo; }
   function refresh(){
     var vis = visible(), first = vis && !intro;
     ROWS.forEach(function(r, i){
@@ -1099,6 +1105,8 @@ tbody tr td{transition:background-color .3s var(--ease)}
   window.addEventListener("pf-lang", later);
   window.addEventListener("pf-currency", later);
   window.addEventListener("load", later);
+  window.addEventListener("pf-hero", later);
+  document.addEventListener("visibilitychange", later);
   document.addEventListener("input", function(){ clearTimeout(refresh._t); refresh._t = setTimeout(refresh, 250); }, true);
   later();
 })();
@@ -1176,18 +1184,27 @@ tbody tr td{transition:background-color .3s var(--ease)}
   render();
   window.addEventListener("pf-lang", render);
   var motion = !(window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches);
-  if(!motion) return;
+  function go(){ window.__heroGo = Date.now(); window.dispatchEvent(new CustomEvent("pf-hero")); }
+  if(!motion){ go(); return; }
   hero.classList.add("prep");
-  var played = false;
+  var played = false, seen = !("IntersectionObserver" in window);
+  function docVisible(){ return document.visibilityState !== "hidden"; }
   function play(){
-    if(played || !page.classList.contains("on")) return;
+    if(played || !seen || !docVisible() || !page.classList.contains("on")) return;
     played = true;
-    requestAnimationFrame(function(){ hero.classList.add("play"); });
-    setTimeout(function(){ hero.classList.remove("prep", "play"); }, 2600);
+    var fontsReady = (document.fonts && document.fonts.ready) ? document.fonts.ready : Promise.resolve();
+    var timeout = new Promise(function(r){ setTimeout(r, 700); });
+    Promise.race([fontsReady, timeout]).then(function(){
+      requestAnimationFrame(function(){ requestAnimationFrame(function(){
+        hero.classList.add("play"); go();
+        setTimeout(function(){ hero.classList.remove("prep", "play"); }, 2800);
+      }); });
+    });
   }
+  if(!seen) new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting) seen = true; }); play(); }, {threshold: .2}).observe(h);
   new MutationObserver(play).observe(page, {attributes: true, attributeFilter: ["class"]});
+  document.addEventListener("visibilitychange", play);
   play();
-  setTimeout(play, 0);
 })();
 </script>
 <footer class="app-foot"><span class="sync-state" id="sync-state"></span><button type="button" class="linkbtn" onclick="__resetPortal(this)">Restablecer valores</button></footer>

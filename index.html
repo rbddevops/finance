@@ -200,6 +200,13 @@ footer.app-foot a{color:var(--gold);cursor:pointer;text-decoration:underline;tex
 .hero h1{font-size:clamp(30px,5.2vw,48px);margin:8px 0 12px;max-width:none}
 .hero + .cards{margin-top:34px}
 
+.fs{margin:14px 0 2px}
+@media (pointer:coarse){
+  input[type=range]{height:6px}
+  input[type=range]::-webkit-slider-thumb{width:28px;height:28px}
+  input[type=range]::-moz-range-thumb{width:22px;height:22px}
+}
+
 /* Moneda y tipo de cambio */
 .rate-note{display:flex;align-items:center;gap:12px;flex-wrap:wrap;font-size:12.5px;color:var(--muted)}
 .rate-note b{color:var(--text);font-family:var(--mono);font-weight:500}
@@ -1119,6 +1126,43 @@ window.addEventListener("pf-currency", function(ev){
 calc();
 
 })();</script>
+<script>
+(function(){
+  // id, mínimo, máximo, paso, ¿importe?
+  var cfg = [["i-inicial",0,250000,1000,1],["i-aport",0,5000,50,1],["i-anios",1,50,1,0],["i-rent",0,15,0.25,0],["i-crece",0,10,0.5,0],["i-infl",0,10,0.25,0],["i-imp",0,40,1,0]];
+  var list = [];
+  function k(){ return window.PFC && window.PFC.cur === "$" ? (window.PFC.rate || 1) : 1; }
+  function pull(o){
+    var v = parseFloat(o.inp.value);
+    o.r.value = isFinite(v) ? v : o.r.min;
+  }
+  function scale(){
+    list.forEach(function(o){
+      if(!o.money) return;
+      o.r.max = Math.round(o.max*k()/o.step)*o.step;
+      pull(o);
+    });
+  }
+  cfg.forEach(function(c){
+    var inp = document.getElementById(c[0]); if(!inp) return;
+    var fd = inp.closest(".field"); if(!fd) return;
+    var lab = fd.parentNode.querySelector("label");
+    var r = document.createElement("input");
+    r.type = "range"; r.className = "fs"; r.min = c[1]; r.max = c[2]; r.step = c[3];
+    if(lab && lab.childNodes[0]) r.setAttribute("aria-label", lab.childNodes[0].textContent.trim());
+    fd.parentNode.insertBefore(r, fd.nextSibling);
+    var o = {inp: inp, r: r, max: c[2], step: c[3], money: !!c[4]};
+    list.push(o);
+    r.addEventListener("input", function(){
+      inp.value = r.value;
+      inp.dispatchEvent(new Event("input", {bubbles: true}));
+    });
+    inp.addEventListener("input", function(){ pull(o); });
+  });
+  scale();
+  window.addEventListener("pf-currency", scale);
+})();
+</script>
 <script>
 (function(){
   var FALLBACK = {rate: 1.1356, label: "30 sep"};

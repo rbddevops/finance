@@ -4,7 +4,11 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="color-scheme" content="light dark">
-<title>Mi portal financiero</title>
+<meta name="theme-color" content="#8f6212">
+<meta name="application-name" content="Portal Financiero">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23201e1a'/%3E%3Cpath d='M13 44 28 29l8 8 15-18' fill='none' stroke='%23e8c36a' stroke-width='6' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M39 19h12v12' fill='none' stroke='%23e8c36a' stroke-width='6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23201e1a'/%3E%3Cpath d='M13 44 28 29l8 8 15-18' fill='none' stroke='%23e8c36a' stroke-width='6' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M39 19h12v12' fill='none' stroke='%23e8c36a' stroke-width='6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<title>Portal Financiero</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;600;700;800&display=swap">
 <style>
@@ -65,7 +69,8 @@ body{margin:0;background-color:var(--bg);color:var(--text);
   backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
 .portal-nav .in{max-width:1100px;margin:0 auto;padding:12px 20px;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
 .portal-nav .brand{display:flex;align-items:center;gap:10px;color:var(--text);font-weight:800;letter-spacing:-.01em;text-decoration:none;font-size:15px;margin-right:auto}
-.portal-nav .brand i{width:10px;height:10px;border-radius:3px;background:var(--gold);transform:rotate(45deg);display:block}
+.portal-nav .brand-mark{width:30px;height:30px;border-radius:9px;background:var(--text);color:var(--gold);display:grid;place-items:center;flex:none;box-shadow:0 3px 10px rgba(40,34,20,.14)}
+.portal-nav .brand-mark svg{width:19px;height:19px;display:block}
 .portal-nav .links{display:flex;gap:2px;flex-wrap:wrap}
 .portal-nav .links a{color:var(--muted);text-decoration:none;font-size:13px;font-weight:600;padding:7px 14px;border-radius:999px;transition:color .15s,background .15s}
 .portal-nav .links a:hover{color:var(--text)}
@@ -164,12 +169,12 @@ footer.app-foot a{color:var(--gold);cursor:pointer;text-decoration:underline;tex
 </head>
 <body>
 <nav class="portal-nav"><div class="in">
-  <a class="brand" href="#inicio"><i></i>Mi portal financiero</a>
+  <a class="brand" href="#inicio" aria-label="Portal Financiero — inicio"><span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17 9.5 10.5l4 4L21 7"/><path d="M15 7h6v6"/></svg></span><span>Portal Financiero</span></a>
   <div class="links">
     <a href="#inicio" data-r="inicio">Inicio</a>
     <a href="#hipoteca" data-r="hipoteca">Hipoteca</a>
-    <a href="#interes" data-r="interes">Interés compuesto</a>
     <a href="#alquiler" data-r="alquiler">Alquiler</a>
+    <a href="#interes" data-r="interes">Interés compuesto</a>    
   </div>
   <div class="seg theme-seg" role="group" aria-label="Tema"><button type="button" data-t="light">Claro</button><button type="button" data-t="dark">Oscuro</button></div>
 </div></nav>
@@ -199,7 +204,7 @@ footer.app-foot a{color:var(--gold);cursor:pointer;text-decoration:underline;tex
 <section class="page" id="page-inicio"><div class="wrap">
   <div class="hero">
     <div class="tag warn">Privado · tus números solo los ves tú</div>
-    <h1>Mi portal financiero</h1>
+    <h1>Portal Financiero</h1>
     <p>Calculadoras para decidir con números: cuánto te costará una hipoteca, cómo crecerá tu dinero y qué alquiler necesitas para que una vivienda sea rentable.</p>
   </div>
 
@@ -853,7 +858,7 @@ calc();
       a.classList.toggle("on", a.getAttribute("data-r") === r);
     });
     window.scrollTo(0, 0);
-    document.title = {inicio:"Mi portal financiero", hipoteca:"Hipoteca", interes:"Interés compuesto", alquiler:"Alquiler y rentabilidad"}[r] + (r==="inicio" ? "" : " · Mi portal financiero");
+    document.title = {inicio:"Portal Financiero", hipoteca:"Hipoteca", interes:"Interés compuesto", alquiler:"Alquiler y rentabilidad"}[r] + (r==="inicio" ? "" : " · Portal Financiero");
   }
   window.addEventListener("hashchange", go);
   go();

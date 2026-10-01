@@ -1,0 +1,877 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>Mi portal financiero</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;600;700;800&display=swap">
+<style>
+/* Diseño: panel sereno de dos tonos. Tokens en :root, claro suave por defecto,
+   oscuro por preferencia del sistema o por el selector del menú. */
+:root{
+  --bg:#e8e6e0; --bg-glow:rgba(160,112,26,.10);
+  --card:#f4f2ed; --card2:#ebe9e3; --line:#d9d6cd;
+  --text:#201e1a; --muted:#6c685f;
+  --gold:#8f6212; --gold2:#a9781f; --on-accent:#fbf8f1;
+  --green:#1d7a45; --red:#b0402f;
+  --pos-bg:#d8eadd; --warn-bg:#f0e3c4; --neg-bg:#f2d9d3;
+  --c1-soft:rgba(143,98,18,.14); --pos-soft:rgba(29,122,69,.14);
+  --shadow:0 1px 2px rgba(40,34,20,.05),0 10px 28px -16px rgba(40,34,20,.22);
+  --nav-bg:rgba(232,230,224,.80);
+  --font:"Manrope",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --mono:"DM Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+  --r:18px;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0b0b0d; --bg-glow:rgba(232,195,106,.08);
+    --card:#131316; --card2:#1a1a1e; --line:#26262b;
+    --text:#efece4; --muted:#8f8b80;
+    --gold:#e8c36a; --gold2:#d2a84a; --on-accent:#1b1406;
+    --green:#62d494; --red:#f28b82;
+    --pos-bg:#12301f; --warn-bg:#352a0e; --neg-bg:#3a1a18;
+    --c1-soft:rgba(232,195,106,.13); --pos-soft:rgba(98,212,148,.12);
+    --shadow:none; --nav-bg:rgba(11,11,13,.78);
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0b0b0d; --bg-glow:rgba(232,195,106,.08);
+  --card:#131316; --card2:#1a1a1e; --line:#26262b;
+  --text:#efece4; --muted:#8f8b80;
+  --gold:#e8c36a; --gold2:#d2a84a; --on-accent:#1b1406;
+  --green:#62d494; --red:#f28b82;
+  --pos-bg:#12301f; --warn-bg:#352a0e; --neg-bg:#3a1a18;
+  --c1-soft:rgba(232,195,106,.13); --pos-soft:rgba(98,212,148,.12);
+  --shadow:none; --nav-bg:rgba(11,11,13,.78);
+  color-scheme:dark;
+}
+
+*{box-sizing:border-box}
+body{margin:0;background-color:var(--bg);color:var(--text);
+  background-image:radial-gradient(900px 420px at 50% -140px,var(--bg-glow),transparent 70%);
+  background-repeat:no-repeat;
+  font-family:var(--font);font-size:14px;line-height:1.5;min-height:100vh;
+  -webkit-font-smoothing:antialiased;transition:background-color .25s,color .25s}
+.wrap{max-width:1100px;margin:0 auto;padding:44px 20px 72px}
+:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+.grid>*{min-width:0}
+
+/* Navegación */
+.portal-nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;background:var(--nav-bg);
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.portal-nav .in{max-width:1100px;margin:0 auto;padding:12px 20px;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.portal-nav .brand{display:flex;align-items:center;gap:10px;color:var(--text);font-weight:800;letter-spacing:-.01em;text-decoration:none;font-size:15px;margin-right:auto}
+.portal-nav .brand i{width:10px;height:10px;border-radius:3px;background:var(--gold);transform:rotate(45deg);display:block}
+.portal-nav .links{display:flex;gap:2px;flex-wrap:wrap}
+.portal-nav .links a{color:var(--muted);text-decoration:none;font-size:13px;font-weight:600;padding:7px 14px;border-radius:999px;transition:color .15s,background .15s}
+.portal-nav .links a:hover{color:var(--text)}
+.portal-nav .links a.on{background:var(--card2);color:var(--text)}
+
+/* Selectores segmentados (moneda, tema, pestañas) */
+.seg{display:inline-flex;background:var(--card2);border-radius:999px;padding:3px;border:1px solid var(--line)}
+.seg button{background:none;border:0;color:var(--muted);padding:6px 14px;border-radius:999px;cursor:pointer;font:600 12.5px var(--font);transition:background .15s,color .15s}
+.seg button:hover{color:var(--text)}
+.seg button.on{background:var(--gold);color:var(--on-accent)}
+
+/* Cabecera de cada calculadora */
+header.top{display:flex;align-items:flex-end;justify-content:space-between;gap:14px;flex-wrap:wrap;margin-bottom:6px}
+header.top h1{font-size:clamp(26px,4.4vw,36px);margin:0;font-weight:800;letter-spacing:-.025em;line-height:1.1;text-wrap:balance}
+
+/* Secciones */
+h2.sec{display:flex;align-items:center;gap:12px;flex-wrap:wrap;font-size:12px;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);font-weight:700;margin:40px 0 14px}
+h2.sec b{font:500 11px var(--mono);color:var(--gold);letter-spacing:.04em}
+.btn{background:var(--card);border:1px solid var(--line);color:var(--gold);padding:6px 12px;border-radius:999px;font:700 12px var(--font);text-transform:none;letter-spacing:0;cursor:pointer;transition:border-color .15s}
+.btn:hover{border-color:var(--gold)}
+
+.panel{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:22px;box-shadow:var(--shadow)}
+.grid{display:grid;gap:14px}
+.g2{grid-template-columns:repeat(2,1fr)} .g3{grid-template-columns:repeat(3,1fr)}
+.g4{grid-template-columns:repeat(4,1fr)} .g5{grid-template-columns:repeat(5,1fr)}
+@media(max-width:860px){.g3,.g4,.g5{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:520px){.g2,.g3,.g4,.g5{grid-template-columns:1fr}}
+
+/* Campos */
+label{display:block;font-size:11px;letter-spacing:.07em;text-transform:uppercase;color:var(--muted);font-weight:700;margin-bottom:8px}
+.field{position:relative}
+.field input,.field select{width:100%;background:var(--card2);border:1px solid transparent;border-radius:12px;color:var(--text);
+  padding:12px 14px;font:500 14px var(--mono);outline:none;transition:border-color .15s,box-shadow .15s}
+.field input{padding-right:54px}
+.field input:focus,.field select:focus{border-color:var(--gold);box-shadow:0 0 0 3px var(--c1-soft)}
+.field span{position:absolute;right:14px;bottom:12px;color:var(--muted);font-size:12.5px;pointer-events:none}
+input[type=number]{-moz-appearance:textfield}
+input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-spin-button{-webkit-appearance:none;margin:0}
+.hint{font-size:11.5px;color:var(--muted);margin-top:7px}
+input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:4px;border-radius:99px;background:var(--line);margin:22px 0 4px;outline:none}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:20px;height:20px;border-radius:50%;background:var(--gold);border:3px solid var(--card);box-shadow:0 0 0 1px var(--gold),0 2px 6px rgba(0,0,0,.25);cursor:pointer}
+input[type=range]::-moz-range-thumb{width:16px;height:16px;border-radius:50%;background:var(--gold);border:3px solid var(--card);box-shadow:0 0 0 1px var(--gold);cursor:pointer}
+
+/* Resultados */
+.kpi{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:20px 22px;box-shadow:var(--shadow)}
+.kpi .t{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:700}
+.kpi .v{font-size:clamp(26px,4vw,36px);font-weight:800;letter-spacing:-.025em;margin-top:8px;font-variant-numeric:tabular-nums;line-height:1.1;overflow-wrap:anywhere}
+.kpi .s{font-size:12.5px;color:var(--muted);margin-top:8px}
+.kpi.small{padding:16px 18px}
+.small .v{font-size:19px;letter-spacing:-.015em}
+.gold{color:var(--gold)} .green{color:var(--green)} .red{color:var(--red)}
+.bar{height:10px;border-radius:99px;overflow:hidden;display:flex;background:var(--card2);margin-top:14px}
+.bar i{display:block;height:100%}
+.legend{display:flex;gap:18px;font-size:12.5px;color:var(--muted);margin-top:12px;flex-wrap:wrap}
+.legend em{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:7px}
+svg{width:100%;height:auto;display:block}
+.tag{display:inline-block;padding:3px 10px;border-radius:99px;font-size:11px;font-weight:700;margin-right:4px}
+.ok{background:var(--pos-bg);color:var(--green)}
+.warn{background:var(--warn-bg);color:var(--gold)}
+.bad{background:var(--neg-bg);color:var(--red)}
+.mode{display:none}.mode.on{display:block}
+.page{display:none}.page.on{display:block}
+
+/* Tablas */
+table{width:100%;border-collapse:collapse;font-size:13px;font-family:var(--mono);font-variant-numeric:tabular-nums}
+th,td{padding:10px 12px;text-align:right;border-bottom:1px solid var(--line);white-space:nowrap}
+th:first-child,td:first-child{text-align:left}
+tbody tr:last-child td{border-bottom:0}
+th{color:var(--muted);font:700 10.5px var(--font);letter-spacing:.08em;text-transform:uppercase;position:sticky;top:0;background:var(--card)}
+.scroll{max-height:380px;overflow:auto}
+.row-hl td{background:var(--c1-soft)}
+.best{color:var(--gold);font-weight:700}
+
+.note{font-size:12.5px;color:var(--muted);line-height:1.6;margin-top:18px;max-width:78ch}
+
+/* Inicio */
+.hero h1{font-size:clamp(34px,6.4vw,58px);margin:16px 0 14px;font-weight:800;letter-spacing:-.035em;line-height:1.04;text-wrap:balance;max-width:16ch}
+.hero p{color:var(--muted);margin:0;max-width:56ch;font-size:16px;line-height:1.6}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:8px}
+@media(max-width:860px){.cards{grid-template-columns:1fr}}
+.card-link{display:flex;flex-direction:column;background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:24px;text-decoration:none;color:var(--text);box-shadow:var(--shadow);transition:transform .2s,border-color .2s}
+.card-link:hover{border-color:var(--gold);transform:translateY(-3px)}
+.card-link .ico{width:46px;height:46px;border-radius:14px;background:var(--c1-soft);color:var(--gold);display:grid;place-items:center}
+.card-link .ico svg{width:24px;height:24px}
+.card-link h3{margin:18px 0 8px;font-size:18px;letter-spacing:-.015em}
+.card-link p{margin:0;color:var(--muted);font-size:13.5px;line-height:1.6}
+.card-link .go{margin-top:auto;padding-top:18px;color:var(--gold);font-size:13px;font-weight:700}
+
+footer.app-foot{max-width:1100px;margin:0 auto;padding:0 20px 56px;font-size:12.5px;color:var(--muted)}
+footer.app-foot a{color:var(--gold);cursor:pointer;text-decoration:underline;text-underline-offset:3px}
+.sync-state{display:inline-block;margin-right:14px}
+.sync-state.on{color:var(--green)}
+
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<nav class="portal-nav"><div class="in">
+  <a class="brand" href="#inicio"><i></i>Mi portal financiero</a>
+  <div class="links">
+    <a href="#inicio" data-r="inicio">Inicio</a>
+    <a href="#hipoteca" data-r="hipoteca">Hipoteca</a>
+    <a href="#interes" data-r="interes">Interés compuesto</a>
+    <a href="#alquiler" data-r="alquiler">Alquiler</a>
+  </div>
+  <div class="seg theme-seg" role="group" aria-label="Tema"><button type="button" data-t="light">Claro</button><button type="button" data-t="dark">Oscuro</button></div>
+</div></nav>
+<script>
+(function(){
+  var T = "portal-theme", r = document.documentElement;
+  try { var t = localStorage.getItem(T); if(t === "light" || t === "dark") r.setAttribute("data-theme", t); } catch(e) {}
+  var mq = window.matchMedia ? matchMedia("(prefers-color-scheme: dark)") : null;
+  function resolved(){ return r.getAttribute("data-theme") || (mq && mq.matches ? "dark" : "light"); }
+  function sync(){
+    var c = resolved();
+    document.querySelectorAll(".theme-seg button").forEach(function(b){ b.classList.toggle("on", b.getAttribute("data-t") === c); });
+  }
+  document.querySelectorAll(".theme-seg button").forEach(function(b){
+    b.addEventListener("click", function(){
+      r.setAttribute("data-theme", b.getAttribute("data-t"));
+      try { localStorage.setItem(T, b.getAttribute("data-t")); } catch(e) {}
+      sync();
+    });
+  });
+  if(mq && mq.addEventListener) mq.addEventListener("change", sync);
+  sync();
+})();
+</script>
+
+<main id="app">
+<section class="page" id="page-inicio"><div class="wrap">
+  <div class="hero">
+    <div class="tag warn">Privado · tus números solo los ves tú</div>
+    <h1>Mi portal financiero</h1>
+    <p>Calculadoras para decidir con números: cuánto te costará una hipoteca, cómo crecerá tu dinero y qué alquiler necesitas para que una vivienda sea rentable.</p>
+  </div>
+
+  <div class="cards" style="margin-top:28px">
+    <a class="card-link" href="#hipoteca">
+      <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11.5 12 4l9 7.5"/><path d="M5.5 10v9.5h13V10"/><path d="M10 19.5v-5h4v5"/></svg></div>
+      <h3>Calculadora de hipoteca</h3>
+      <p>Cuota mensual, intereses totales, gastos de compra, ratio de esfuerzo y cuadro de amortización con amortización extra.</p>
+      <span class="go">Abrir →</span>
+    </a>
+    <a class="card-link" href="#interes">
+      <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17 9.5 10.5l4 4L21 7"/><path d="M15 7h6v6"/></svg></div>
+      <h3>Interés compuesto</h3>
+      <p>Proyecta tu capital con aportaciones periódicas, revalorización de la aportación e inflación para ver el valor real.</p>
+      <span class="go">Abrir →</span>
+    </a>
+    <a class="card-link" href="#alquiler">
+      <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="15" r="4"/><path d="M11 12 20 3"/><path d="m16 7 3 3"/><path d="m14 9 2 2"/></svg></div>
+      <h3>Alquiler y rentabilidad</h3>
+      <p>Qué precio pedir y qué rentabilidad esperar según alquiler tradicional, vacacional o por habitaciones.</p>
+      <span class="go">Abrir →</span>
+    </a>
+  </div>
+
+  <p class="note" style="margin-top:34px">Son simulaciones orientativas: no incluyen toda la fiscalidad (IRPF, IVA, tasas locales) ni sustituyen el consejo de un asesor financiero o fiscal.</p></div></section>
+<section class="page" id="page-hipoteca"><div class="wrap">
+
+  <header class="top">
+    <h1>Calculadora de hipoteca</h1>
+    <div class="seg" id="h-cur"><button class="on" data-c="€">€ EUR</button><button data-c="$">$ USD</button></div>
+  </header>
+
+  <h2 class="sec"><b>01</b> Vivienda y financiación</h2>
+  <div class="panel">
+    <div class="grid g4">
+      <div><label>Precio de la vivienda</label><div class="field"><input id="h-precio" type="number" value="250000" step="1000"><span class="cur">€</span></div></div>
+      <div><label>Entrada / ahorros</label><div class="field"><input id="h-entrada" type="number" value="50000" step="1000"><span class="cur">€</span></div>
+        <div class="hint" id="h-ltv"></div></div>
+      <div><label>Plazo (años)</label><div class="field"><input id="h-anios" type="number" value="25" min="1" max="40"><span>años</span></div></div>
+      <div><label>Interés anual (TIN)</label><div class="field"><input id="h-tin" type="number" value="2.9" step="0.05"><span>%</span></div></div>
+    </div>
+    <input type="range" id="h-slider" min="50000" max="1000000" step="5000" value="250000">
+  </div>
+
+  <h2 class="sec"><b>02</b> Gastos de compra y extras</h2>
+  <div class="panel">
+    <div class="grid g4">
+      <div><label>Impuesto (ITP / IVA+AJD)</label><div class="field"><input id="h-itp" type="number" value="10" step="0.5"><span>%</span></div><div class="hint">Cataluña: ITP 10% (segunda mano)</div></div>
+      <div><label>Notaría, registro, gestoría</label><div class="field"><input id="h-otros" type="number" value="3000" step="100"><span class="cur">€</span></div></div>
+      <div><label>Amortización extra mensual</label><div class="field"><input id="h-extra" type="number" value="0" step="50"><span class="cur">€</span></div><div class="hint">Reduce el plazo, no la cuota</div></div>
+      <div><label>Ingresos netos mensuales</label><div class="field"><input id="h-ingresos" type="number" value="3500" step="100"><span class="cur">€</span></div><div class="hint">Para calcular el ratio de esfuerzo</div></div>
+    </div>
+  </div>
+
+  <h2 class="sec"><b>03</b> Resultado</h2>
+  <div class="grid g2">
+    <div class="kpi"><div class="t">Cuota mensual</div><div class="v gold" id="h-cuota">—</div><div class="s" id="h-cuotaSub"></div></div>
+    <div class="kpi"><div class="t">Ratio de esfuerzo</div><div class="v" id="h-esfuerzo">—</div><div class="s" id="h-esfuerzoSub"></div></div>
+  </div>
+  <div class="grid g5" style="margin-top:14px">
+    <div class="kpi small"><div class="t">Préstamo</div><div class="v" id="h-prestamo">—</div></div>
+    <div class="kpi small"><div class="t">Intereses totales</div><div class="v red" id="h-intereses">—</div></div>
+    <div class="kpi small"><div class="t">Total a pagar</div><div class="v" id="h-total">—</div></div>
+    <div class="kpi small"><div class="t">Gastos de compra</div><div class="v" id="h-gastos">—</div></div>
+    <div class="kpi small"><div class="t">Dinero inicial necesario</div><div class="v gold" id="h-inicial">—</div></div>
+  </div>
+
+  <div class="panel" style="margin-top:14px">
+    <div class="t" style="font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:700">Capital vs intereses</div>
+    <div class="bar"><i id="h-bCap" style="background:var(--gold)"></i><i id="h-bInt" style="background:var(--red)"></i></div>
+    <div class="legend"><span><em style="background:var(--gold)"></em>Capital <b id="h-lCap"></b></span><span><em style="background:var(--red)"></em>Intereses <b id="h-lInt"></b></span><span id="h-ahorro"></span></div>
+  </div>
+
+  <h2 class="sec"><b>04</b> Evolución de la deuda</h2>
+  <div class="panel"><svg id="h-chart" viewBox="0 0 900 300" preserveAspectRatio="none"></svg>
+    <div class="legend"><span><em style="background:var(--gold)"></em>Capital pendiente</span><span><em style="background:var(--red)"></em>Intereses acumulados</span></div></div>
+
+  <h2 class="sec"><b>05</b> Cuadro de amortización anual</h2>
+  <div class="panel"><div class="scroll"><table>
+    <thead><tr><th>Año</th><th>Cuota pagada</th><th>Capital</th><th>Intereses</th><th>Pendiente</th></tr></thead>
+    <tbody id="h-tbody"></tbody></table></div></div>
+</div></section>
+<section class="page" id="page-interes"><div class="wrap">
+
+  <header class="top">
+    <h1>Calculadora de interés compuesto</h1>
+    <div class="seg" id="i-cur"><button class="on" data-c="€">€ EUR</button><button data-c="$">$ USD</button></div>
+  </header>
+
+  <h2 class="sec"><b>01</b> Parámetros</h2>
+  <div class="panel">
+    <div class="grid g4">
+      <div><label>Capital inicial</label><div class="field"><input id="i-inicial" type="number" value="10000" step="500"><span class="cur">€</span></div></div>
+      <div><label>Aportación mensual</label><div class="field"><input id="i-aport" type="number" value="300" step="50"><span class="cur">€</span></div></div>
+      <div><label>Años</label><div class="field"><input id="i-anios" type="number" value="20" min="1" max="60"><span>años</span></div></div>
+      <div><label>Rentabilidad anual</label><div class="field"><input id="i-rent" type="number" value="7" step="0.25"><span>%</span></div></div>
+    </div>
+    <div class="grid g4" style="margin-top:14px">
+      <div><label>Capitalización</label><div class="field"><select id="i-cap"><option value="m">Mensual</option><option value="a">Anual</option></select></div></div>
+      <div><label>Aportación crece cada año</label><div class="field"><input id="i-crece" type="number" value="0" step="0.5"><span>%</span></div><div class="hint">Por ejemplo, subir tu aporte con el sueldo</div></div>
+      <div><label>Inflación anual</label><div class="field"><input id="i-infl" type="number" value="2.5" step="0.25"><span>%</span></div><div class="hint">Para calcular el valor real</div></div>
+      <div><label>Impuesto sobre ganancias</label><div class="field"><input id="i-imp" type="number" value="0" step="1"><span>%</span></div><div class="hint">Aplicado al final (opcional)</div></div>
+    </div>
+  </div>
+
+  <h2 class="sec"><b>02</b> Resultado</h2>
+  <div class="grid g2">
+    <div class="kpi"><div class="t">Valor final</div><div class="v gold" id="i-final">—</div><div class="s" id="i-finalSub"></div></div>
+    <div class="kpi"><div class="t">Valor real (poder adquisitivo de hoy)</div><div class="v" id="i-real">—</div><div class="s" id="i-realSub"></div></div>
+  </div>
+  <div class="grid g4" style="margin-top:14px">
+    <div class="kpi small"><div class="t">Total aportado</div><div class="v" id="i-aportado">—</div></div>
+    <div class="kpi small"><div class="t">Intereses generados</div><div class="v green" id="i-intereses">—</div></div>
+    <div class="kpi small"><div class="t">Multiplicador</div><div class="v" id="i-mult">—</div></div>
+    <div class="kpi small"><div class="t">Años para duplicar</div><div class="v" id="i-dup">—</div><div class="s">Regla del 72</div></div>
+  </div>
+
+  <div class="panel" style="margin-top:14px">
+    <div class="t" style="font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:700">Aportado vs intereses</div>
+    <div class="bar"><i id="i-bA" style="background:var(--gold)"></i><i id="i-bI" style="background:var(--green)"></i></div>
+    <div class="legend"><span><em style="background:var(--gold)"></em>Aportado <b id="i-lA"></b></span><span><em style="background:var(--green)"></em>Intereses <b id="i-lI"></b></span></div>
+  </div>
+
+  <h2 class="sec"><b>03</b> Evolución del capital</h2>
+  <div class="panel"><svg id="i-chart" viewBox="0 0 900 300" preserveAspectRatio="none"></svg>
+    <div class="legend"><span><em style="background:var(--gold)"></em>Total aportado</span><span><em style="background:var(--green)"></em>Valor total</span><span id="i-axis"></span></div></div>
+
+  <h2 class="sec"><b>04</b> Año a año</h2>
+  <div class="panel"><div class="scroll"><table>
+    <thead><tr><th>Año</th><th>Aportado</th><th>Intereses</th><th>Valor total</th><th>Valor real</th></tr></thead>
+    <tbody id="i-tbody"></tbody></table></div></div>
+
+  <p class="note">Simulación orientativa con rentabilidad constante. Los rendimientos reales varían cada año y no están garantizados. El impuesto se aplica de forma simplificada sobre el total de ganancias al final.</p>
+</div></section>
+<section class="page" id="page-alquiler"><div class="wrap">
+
+  <header class="top">
+    <h1>Alquiler y rentabilidad</h1>
+    <div class="seg" id="a-cur"><button class="on" data-c="€">€ EUR</button><button data-c="$">$ USD</button></div>
+  </header>
+
+  <h2 class="sec"><b>01</b> Inversión <button class="btn" id="a-import" type="button">↓ Importar de la hipoteca</button></h2>
+  <div class="panel">
+    <div class="grid g4">
+      <div><label>Precio de compra</label><div class="field"><input id="a-precio" type="number" value="150000" step="1000"><span class="cur">€</span></div></div>
+      <div><label>Gastos de compra</label><div class="field"><input id="a-gcompra" type="number" value="12" step="0.5"><span>%</span></div><div class="hint">Impuestos, notaría, registro</div></div>
+      <div><label>Reformas</label><div class="field"><input id="a-reformas" type="number" value="10000" step="500"><span class="cur">€</span></div></div>
+      <div><label>Mobiliario y equipamiento</label><div class="field"><input id="a-mobil" type="number" value="5000" step="500"><span class="cur">€</span></div></div>
+    </div>
+    <div class="grid g4" style="margin-top:14px">
+      <div><label>Préstamo hipotecario</label><div class="field"><input id="a-prestamo" type="number" value="100000" step="1000"><span class="cur">€</span></div><div class="hint">0 si compras al contado</div></div>
+      <div><label>Interés anual (TIN)</label><div class="field"><input id="a-tin" type="number" value="3" step="0.05"><span>%</span></div></div>
+      <div><label>Plazo</label><div class="field"><input id="a-anios" type="number" value="25" min="1" max="40"><span>años</span></div></div>
+      <div><label>Cuota hipoteca</label><div class="kpi small" style="padding:10px 12px;border-radius:12px"><div class="v gold" id="a-cuota" style="margin:0;font-size:16px">—</div></div></div>
+    </div>
+  </div>
+
+  <h2 class="sec"><b>02</b> Gastos fijos de la vivienda</h2>
+  <div class="panel">
+    <div class="grid g4">
+      <div><label>IBI</label><div class="field"><input id="a-ibi" type="number" value="500" step="50"><span class="cur">€/año</span></div></div>
+      <div><label>Comunidad</label><div class="field"><input id="a-comun" type="number" value="60" step="5"><span class="cur">€/mes</span></div></div>
+      <div><label>Seguro</label><div class="field"><input id="a-seguro" type="number" value="250" step="10"><span class="cur">€/año</span></div></div>
+      <div><label>Mantenimiento / averías</label><div class="field"><input id="a-mant" type="number" value="600" step="50"><span class="cur">€/año</span></div></div>
+    </div>
+  </div>
+
+  <h2 class="sec"><b>03</b> Tipo de alquiler</h2>
+  <div class="panel">
+    <div class="seg" id="a-tabs" style="display:inline-flex;margin-bottom:18px">
+      <button class="on" data-m="trad">Tradicional</button><button data-m="vac">Vacacional</button><button data-m="hab">Por habitaciones</button>
+    </div>
+
+    <div class="mode on" id="a-m-trad">
+      <div class="grid g4">
+        <div><label>Alquiler mensual</label><div class="field"><input id="a-t_renta" type="number" value="850" step="25"><span class="cur">€/mes</span></div></div>
+        <div><label>Meses vacía al año</label><div class="field"><input id="a-t_vacio" type="number" value="0.5" step="0.5" min="0" max="12"><span>meses</span></div></div>
+        <div><label>Gestión / agencia</label><div class="field"><input id="a-t_gest" type="number" value="0" step="1"><span>%</span></div><div class="hint">0 si lo gestionas tú</div></div>
+      </div>
+    </div>
+
+    <div class="mode" id="a-m-vac">
+      <div class="grid g4">
+        <div><label>Tarifa media por noche</label><div class="field"><input id="a-v_tarifa" type="number" value="95" step="5"><span class="cur">€</span></div></div>
+        <div><label>Ocupación anual</label><div class="field"><input id="a-v_ocup" type="number" value="60" step="1" min="0" max="100"><span>%</span></div></div>
+        <div><label>Noches por estancia</label><div class="field"><input id="a-v_est" type="number" value="3" step="0.5" min="1"><span>noches</span></div></div>
+        <div><label>Coste de limpieza por estancia</label><div class="field"><input id="a-v_limp" type="number" value="40" step="5"><span class="cur">€</span></div></div>
+      </div>
+      <div class="grid g4" style="margin-top:14px">
+        <div><label>Comisión plataforma</label><div class="field"><input id="a-v_com" type="number" value="15" step="1"><span>%</span></div><div class="hint">Airbnb / Booking</div></div>
+        <div><label>Gestión profesional</label><div class="field"><input id="a-v_gest" type="number" value="0" step="1"><span>%</span></div></div>
+        <div><label>Suministros y extras</label><div class="field"><input id="a-v_sum" type="number" value="150" step="10"><span class="cur">€/mes</span></div><div class="hint">Luz, agua, internet, ropa de cama</div></div>
+      </div>
+    </div>
+
+    <div class="mode" id="a-m-hab">
+      <div class="grid g4">
+        <div><label>Nº de habitaciones</label><div class="field"><input id="a-h_n" type="number" value="3" step="1" min="1"><span>hab.</span></div></div>
+        <div><label>Precio por habitación</label><div class="field"><input id="a-h_precio" type="number" value="350" step="10"><span class="cur">€/mes</span></div></div>
+        <div><label>Ocupación</label><div class="field"><input id="a-h_ocup" type="number" value="92" step="1" min="0" max="100"><span>%</span></div></div>
+        <div><label>Suministros incluidos</label><div class="field"><input id="a-h_sum" type="number" value="120" step="10"><span class="cur">€/mes</span></div></div>
+      </div>
+      <div class="grid g4" style="margin-top:14px">
+        <div><label>Gestión</label><div class="field"><input id="a-h_gest" type="number" value="0" step="1"><span>%</span></div></div>
+      </div>
+    </div>
+
+    <div class="grid g4" style="margin-top:20px">
+      <div><label>Rentabilidad neta objetivo</label><div class="field"><input id="a-objetivo" type="number" value="6" step="0.25"><span>%</span></div><div class="hint">Sobre la inversión total</div></div>
+    </div>
+  </div>
+
+  <h2 class="sec"><b>04</b> Precio recomendado</h2>
+  <div class="grid g2">
+    <div class="kpi"><div class="t" id="a-recT">Para tu rentabilidad objetivo</div><div class="v gold" id="a-rec">—</div><div class="s" id="a-recSub"></div></div>
+    <div class="kpi"><div class="t">Mínimo para no perder dinero</div><div class="v" id="a-min">—</div><div class="s" id="a-minSub">Cubre gastos y cuota de la hipoteca</div></div>
+  </div>
+
+  <h2 class="sec"><b>05</b> Rentabilidad con tus datos actuales</h2>
+  <div class="grid g2">
+    <div class="kpi"><div class="t">Rentabilidad neta</div><div class="v" id="a-neta">—</div><div class="s" id="a-netaSub"></div></div>
+    <div class="kpi"><div class="t">Flujo de caja mensual</div><div class="v" id="a-flujo">—</div><div class="s" id="a-flujoSub"></div></div>
+  </div>
+  <div class="grid g5" style="margin-top:14px">
+    <div class="kpi small"><div class="t">Inversión total</div><div class="v" id="a-inv">—</div></div>
+    <div class="kpi small"><div class="t">Ingresos anuales</div><div class="v" id="a-ing">—</div></div>
+    <div class="kpi small"><div class="t">Gastos anuales</div><div class="v red" id="a-gas">—</div></div>
+    <div class="kpi small"><div class="t">Rentabilidad bruta</div><div class="v" id="a-bruta">—</div></div>
+    <div class="kpi small"><div class="t">Cash on cash</div><div class="v gold" id="a-coc">—</div><div class="s">Sobre tu dinero puesto</div></div>
+  </div>
+
+  <h2 class="sec"><b>06</b> Comparativa de modalidades</h2>
+  <div class="panel"><div class="scroll"><table>
+    <thead><tr><th>Modalidad</th><th>Ingresos/año</th><th>Beneficio neto</th><th>Rent. bruta</th><th>Rent. neta</th><th>Flujo/mes</th><th>Precio para tu objetivo</th></tr></thead>
+    <tbody id="a-cmp"></tbody></table></div>
+    <p class="note">La comparativa usa los datos introducidos en cada pestaña. Beneficio neto = ingresos menos gastos fijos y variables, antes de hipoteca e impuestos.</p></div>
+
+  <p class="note">Simulación orientativa: no incluye IRPF, IVA ni tasas. El alquiler vacacional exige licencia en muchas zonas (en Cataluña y otras comunidades hay restricciones), y la rentabilidad depende mucho de la ocupación real. Consulta con un asesor antes de decidir.</p>
+</div></section>
+</main>
+
+<footer class="app-foot"><span class="sync-state" id="sync-state"></span><a onclick="__resetPortal(this)">Restablecer valores</a></footer>
+
+<script>
+(function(){
+  var K = "portal-financiero-v1", s = {}, init = {}, applying = false;
+  try { s = JSON.parse(localStorage.getItem(K) || "{}"); } catch(e) {}
+  var els = document.querySelectorAll("#app input, #app select");
+  els.forEach(function(el){ if(el.id) init[el.id] = el.value; });
+  els.forEach(function(el){
+    if(!el.id) return;
+    if(s[el.id] !== undefined) el.value = s[el.id];
+    el.addEventListener("input", function(){
+      if(applying) return;
+      s[el.id] = el.value;
+      try { localStorage.setItem(K, JSON.stringify(s)); } catch(e) {}
+      queueSave();
+    });
+  });
+
+  var stateEl = document.getElementById("sync-state");
+  function status(text, on){ if(stateEl){ stateEl.textContent = text; stateEl.className = "sync-state" + (on ? " on" : ""); } }
+  status("Guardado solo en este navegador", false);
+
+  function fire(el){ el.dispatchEvent(new Event("input", {bubbles:true})); }
+  function applyValues(vals){
+    applying = true;
+    els.forEach(function(el){
+      if(el.id && vals[el.id] !== undefined && el.value !== String(vals[el.id])){ el.value = vals[el.id]; fire(el); }
+    });
+    applying = false;
+    s = Object.assign({}, vals);
+    try { localStorage.setItem(K, JSON.stringify(s)); } catch(e) {}
+  }
+
+  var docRef = null, timer = null, saving = false, dirty = false;
+  function queueSave(){
+    if(!docRef) return;
+    dirty = true;
+    clearTimeout(timer);
+    timer = setTimeout(flush, 900);
+  }
+  function flush(){
+    if(!docRef || saving || !dirty) return;
+    saving = true; dirty = false;
+    docRef.set({values: s, updated: Date.now()}).then(function(){
+      status("Sincronizado con tu cuenta", true);
+    }, function(){
+      status("No se pudo sincronizar. Se guarda en este navegador", false);
+    }).then(function(){
+      saving = false;
+      if(dirty) flush();
+    });
+  }
+
+  // Sincronización entre dispositivos (si el visor la ofrece)
+  (async function(){
+    try {
+      if(!window.claude || !window.claude.use) return;
+      var db = await window.claude.use("db");
+      var user = await window.claude.use("user");
+      if(!db || !user) return;
+      var id = await user.id();
+      if(!id) return;
+      docRef = db.doc("data/users/" + id + "/estado");
+      var snap = await docRef.get();
+      if(snap.exists && snap.data() && snap.data().values){
+        applyValues(snap.data().values);
+      } else {
+        dirty = true; flush();
+      }
+      status("Sincronizado con tu cuenta", true);
+    } catch(e) { docRef = null; }
+  })();
+
+  window.__resetPortal = function(btn){
+    if(!btn.dataset.armed){
+      btn.dataset.armed = "1";
+      btn.textContent = "Pulsa otra vez para borrar tus datos";
+      setTimeout(function(){ delete btn.dataset.armed; btn.textContent = "Restablecer valores"; }, 4000);
+      return;
+    }
+    delete btn.dataset.armed;
+    btn.textContent = "Restablecer valores";
+    applyValues(init);
+    s = {};
+    try { localStorage.removeItem(K); } catch(e) {}
+    if(docRef){ dirty = true; s = {}; flush(); }
+  };
+})();
+</script>
+<script>(function(){
+const ROOT = document.getElementById("page-hipoteca");
+
+const $ = id => document.getElementById("h-" + id);
+let cur = "€";
+const fmt = n => new Intl.NumberFormat("es-ES",{maximumFractionDigits:0}).format(n) + " " + cur;
+const fmt2 = n => new Intl.NumberFormat("es-ES",{minimumFractionDigits:2,maximumFractionDigits:2}).format(n) + " " + cur;
+
+function schedule(L, r, n, pago, extra){
+  let bal = L, rows = [], m = 0, ints = 0;
+  let yr = {c:0,i:0,p:0};
+  while(bal > 0.005 && m < n + 600){
+    m++;
+    const i = bal * r;
+    let cap = Math.min(bal, pago - i + extra);
+    if(cap < 0) cap = 0;
+    bal -= cap; ints += i;
+    yr.c += cap; yr.i += i; yr.p += cap + i;
+    if(m % 12 === 0 || bal <= 0.005){
+      rows.push({y:Math.ceil(m/12), ...yr, bal:Math.max(bal,0), cumInt:ints});
+      yr = {c:0,i:0,p:0};
+    }
+  }
+  return {rows, months:m, ints};
+}
+
+function calc(){
+  const precio = +$("precio").value||0, entrada = +$("entrada").value||0;
+  const anios = Math.max(1, +$("anios").value||1), tin = +$("tin").value||0;
+  const itp = +$("itp").value||0, otros = +$("otros").value||0;
+  const extra = +$("extra").value||0, ingresos = +$("ingresos").value||0;
+
+  const L = Math.max(precio - entrada, 0);
+  const n = anios*12, r = tin/100/12;
+  const pago = L === 0 ? 0 : (r === 0 ? L/n : L*r/(1-Math.pow(1+r,-n)));
+
+  const base = schedule(L, r, n, pago, 0);
+  const real = extra > 0 ? schedule(L, r, n, pago, extra) : base;
+  const totalInt = real.ints;
+  const gastos = precio*itp/100 + otros;
+
+  $("ltv").textContent = precio ? "Financias el " + (L/precio*100).toFixed(1) + "% (LTV)" : "";
+  $("cuota").textContent = fmt2(pago);
+  $("cuotaSub").textContent = extra>0 ? "+ " + fmt(extra) + "/mes de amortización extra" : "durante " + anios + " años (" + n + " cuotas)";
+  $("prestamo").textContent = fmt(L);
+  $("intereses").textContent = fmt(totalInt);
+  $("total").textContent = fmt(L + totalInt);
+  $("gastos").textContent = fmt(gastos);
+  $("inicial").textContent = fmt(entrada + gastos);
+
+  const ratio = ingresos ? (pago+extra)/ingresos*100 : 0;
+  const e = $("esfuerzo");
+  e.textContent = ingresos ? ratio.toFixed(1) + "%" : "—";
+  e.className = "v " + (ratio<=30?"green":ratio<=35?"gold":"red");
+  $("esfuerzoSub").innerHTML = !ingresos ? "" :
+    ratio<=30 ? '<span class="tag ok">Cómodo</span> por debajo del 30%' :
+    ratio<=35 ? '<span class="tag warn">Límite</span> entre 30% y 35%' :
+    '<span class="tag bad">Alto</span> los bancos suelen exigir máx. 35%';
+
+  const tot = L + totalInt || 1;
+  $("bCap").style.width = (L/tot*100)+"%"; $("bInt").style.width = (totalInt/tot*100)+"%";
+  $("lCap").textContent = fmt(L) + " (" + (L/tot*100).toFixed(0) + "%)";
+  $("lInt").textContent = fmt(totalInt) + " (" + (totalInt/tot*100).toFixed(0) + "%)";
+  if(extra>0){
+    const saved = base.ints - real.ints, ms = base.months - real.months;
+    $("ahorro").innerHTML = '<b class="green">Ahorras ' + fmt(saved) + ' y ' + Math.floor(ms/12) + ' años ' + (ms%12) + ' meses</b>';
+  } else $("ahorro").textContent = "";
+
+  $("tbody").innerHTML = real.rows.map(x =>
+    `<tr><td>${x.y}</td><td>${fmt(x.p)}</td><td>${fmt(x.c)}</td><td>${fmt(x.i)}</td><td>${fmt(x.bal)}</td></tr>`).join("");
+
+  drawChart(real.rows, L, totalInt);
+}
+
+function drawChart(rows, L, totalInt){
+  const W=900,H=300,p=10, N=rows.length;
+  if(!N){$("chart").innerHTML="";return;}
+  const maxY = Math.max(L, totalInt, 1);
+  const x = i => p + (W-2*p) * (i/N);
+  const y = v => H-p - (H-2*p) * (v/maxY);
+  let bal = [`M${x(0)},${y(L)}`], itn = [`M${x(0)},${y(0)}`];
+  rows.forEach((r,i)=>{ bal.push(`L${x(i+1)},${y(r.bal)}`); itn.push(`L${x(i+1)},${y(r.cumInt)}`); });
+  const area = bal.join(" ") + ` L${x(N)},${y(0)} L${x(0)},${y(0)} Z`;
+  let grid = "";
+  for(let k=0;k<=4;k++){ const yy = p + (H-2*p)*k/4; grid += `<line x1="${p}" x2="${W-p}" y1="${yy}" y2="${yy}" style="stroke:var(--line)" stroke-width="1" vector-effect="non-scaling-stroke"/>`; }
+  $("chart").innerHTML = grid +
+    `<path d="${area}" style="fill:var(--c1-soft)"/>` +
+    `<path d="${bal.join(" ")}" fill="none" style="stroke:var(--gold)" stroke-width="2.5" vector-effect="non-scaling-stroke"/>` +
+    `<path d="${itn.join(" ")}" fill="none" style="stroke:var(--red)" stroke-width="2.5" vector-effect="non-scaling-stroke"/>`;
+}
+
+// eventos
+["precio","entrada","anios","tin","itp","otros","extra","ingresos"].forEach(id => $(id).addEventListener("input", () => {
+  if(id==="precio") $("slider").value = $("precio").value; calc(); }));
+$("slider").addEventListener("input", () => { $("precio").value = $("slider").value; calc(); });
+$("cur").addEventListener("click", e => {
+  if(e.target.tagName!=="BUTTON") return;
+  cur = e.target.dataset.c;
+  [...$("cur").children].forEach(b => b.classList.toggle("on", b===e.target));
+  ROOT.querySelectorAll(".cur").forEach(s => s.textContent = cur);
+  calc();
+});
+calc();
+
+})();</script>
+<script>(function(){
+const ROOT = document.getElementById("page-interes");
+
+const $ = id => document.getElementById("i-" + id);
+let cur = "€";
+const fmt = n => new Intl.NumberFormat("es-ES",{maximumFractionDigits:0}).format(n) + " " + cur;
+
+function simulate(){
+  const c0 = +$("inicial").value||0, a0 = +$("aport").value||0;
+  const years = Math.max(1, Math.min(60, Math.floor(+$("anios").value||1)));
+  const r = (+$("rent").value||0)/100, g = (+$("crece").value||0)/100;
+  const inf = (+$("infl").value||0)/100, mode = $("cap").value;
+  let bal = c0, contrib = c0, accrued = 0, aport = a0;
+  const rows = [];
+  for(let y=1; y<=years; y++){
+    for(let m=0; m<12; m++){
+      if(mode==="m"){ bal += bal*r/12; }
+      else { accrued += bal*r/12; }
+      bal += aport; contrib += aport;
+    }
+    if(mode==="a"){ bal += accrued; accrued = 0; }
+    rows.push({y, contrib, int:bal-contrib, bal, real:bal/Math.pow(1+inf,y)});
+    aport *= (1+g);
+  }
+  return {rows, years, r, inf, c0};
+}
+
+function calc(){
+  const {rows, years, r, inf} = simulate();
+  const last = rows[rows.length-1];
+  const tax = (+$("imp").value||0)/100;
+  const gain = Math.max(last.int,0);
+  const net = last.bal - gain*tax;
+  const realNet = net/Math.pow(1+inf, years);
+
+  $("final").textContent = fmt(net);
+  $("finalSub").textContent = tax>0 ? "Tras impuestos (" + fmt(gain*tax) + " de impuesto)" : "En " + years + " años";
+  $("real").textContent = fmt(realNet);
+  $("realSub").textContent = "Con " + (inf*100).toFixed(1) + "% de inflación anual";
+  $("aportado").textContent = fmt(last.contrib);
+  $("intereses").textContent = fmt(last.int - gain*tax);
+  $("mult").textContent = last.contrib ? "×" + (net/last.contrib).toFixed(2) : "—";
+  $("dup").textContent = r>0 ? (72/(r*100)).toFixed(1) + " años" : "—";
+
+  const tot = last.contrib + last.int || 1;
+  $("bA").style.width = (last.contrib/tot*100)+"%"; $("bI").style.width = (last.int/tot*100)+"%";
+  $("lA").textContent = fmt(last.contrib) + " (" + (last.contrib/tot*100).toFixed(0) + "%)";
+  $("lI").textContent = fmt(last.int) + " (" + (last.int/tot*100).toFixed(0) + "%)";
+
+  $("tbody").innerHTML = rows.map(x =>
+    `<tr><td>${x.y}</td><td>${fmt(x.contrib)}</td><td>${fmt(x.int)}</td><td>${fmt(x.bal)}</td><td>${fmt(x.real)}</td></tr>`).join("");
+
+  draw(rows);
+}
+
+function draw(rows){
+  const W=900,H=300,p=10,N=rows.length;
+  const maxY = Math.max(...rows.map(r=>r.bal), 1);
+  const x = i => p + (W-2*p)*(i/N);
+  const y = v => H-p - (H-2*p)*(v/maxY);
+  const c0 = +$("inicial").value||0;
+  let top=[`M${x(0)},${y(c0)}`], low=[`M${x(0)},${y(c0)}`];
+  rows.forEach((r,i)=>{ top.push(`L${x(i+1)},${y(r.bal)}`); low.push(`L${x(i+1)},${y(r.contrib)}`); });
+  let grid="";
+  for(let k=0;k<=4;k++){const yy=p+(H-2*p)*k/4; grid+=`<line x1="${p}" x2="${W-p}" y1="${yy}" y2="${yy}" style="stroke:var(--line)" stroke-width="1" vector-effect="non-scaling-stroke"/>`;}
+  $("chart").innerHTML = grid +
+    `<path d="${top.join(" ")} L${x(N)},${y(0)} L${x(0)},${y(0)} Z" style="fill:var(--pos-soft)"/>` +
+    `<path d="${low.join(" ")} L${x(N)},${y(0)} L${x(0)},${y(0)} Z" style="fill:var(--c1-soft)"/>` +
+    `<path d="${top.join(" ")}" fill="none" style="stroke:var(--green)" stroke-width="2.5" vector-effect="non-scaling-stroke"/>` +
+    `<path d="${low.join(" ")}" fill="none" style="stroke:var(--gold)" stroke-width="2.5" vector-effect="non-scaling-stroke"/>`;
+  $("axis").textContent = "Máximo del gráfico: " + fmt(maxY);
+}
+
+["inicial","aport","anios","rent","cap","crece","infl","imp"].forEach(id => $(id).addEventListener("input", calc));
+$("cur").addEventListener("click", e => {
+  if(e.target.tagName!=="BUTTON") return;
+  cur = e.target.dataset.c;
+  [...$("cur").children].forEach(b => b.classList.toggle("on", b===e.target));
+  ROOT.querySelectorAll(".cur").forEach(s => s.textContent = cur);
+  calc();
+});
+calc();
+
+})();</script>
+<script>(function(){
+const ROOT = document.getElementById("page-alquiler");
+
+const $ = id => document.getElementById("a-" + id);
+const v = id => +$(id).value || 0;
+let cur = "€", mode = "trad";
+const fmt = n => new Intl.NumberFormat("es-ES",{maximumFractionDigits:0}).format(n) + " " + cur;
+const fmt2 = n => new Intl.NumberFormat("es-ES",{minimumFractionDigits:2,maximumFractionDigits:2}).format(n) + " " + cur;
+const pct = n => (isFinite(n) ? n.toFixed(2) : "—") + "%";
+
+const LABELS = {
+  trad: {name:"Tradicional", unit:"alquiler/mes"},
+  vac:  {name:"Vacacional", unit:"por noche"},
+  hab:  {name:"Por habitaciones", unit:"por habitación/mes"}
+};
+
+// Cada modalidad: dado el parámetro principal p devuelve ingresos, variables y fijos propios
+function model(m, p){
+  if(m==="trad"){
+    const ing = p * Math.max(12 - v("t_vacio"), 0);
+    return {ing, vari: ing*v("t_gest")/100, fijo: 0, mensual: p};
+  }
+  if(m==="vac"){
+    const noches = 365 * v("v_ocup")/100;
+    const ing = p * noches;
+    const estancias = noches / Math.max(v("v_est"),1);
+    return {ing, vari: ing*(v("v_com")+v("v_gest"))/100 + estancias*v("v_limp"), fijo: v("v_sum")*12, mensual: ing/12};
+  }
+  const ing = v("h_n") * p * 12 * v("h_ocup")/100;
+  return {ing, vari: ing*v("h_gest")/100, fijo: v("h_sum")*12, mensual: ing/12};
+}
+function mainParam(m){
+  return m==="trad" ? v("t_renta") : m==="vac" ? v("v_tarifa") : v("h_precio");
+}
+function fixedCommon(){ return v("ibi") + v("comun")*12 + v("seguro") + v("mant"); }
+function noi(m, p){
+  const r = model(m,p);
+  return {ing:r.ing, gastos:r.vari + r.fijo + fixedCommon(), noi: r.ing - r.vari - r.fijo - fixedCommon(), mensual:r.mensual};
+}
+// El beneficio es lineal en p: se despeja el parámetro que da un beneficio objetivo
+function solve(m, target){
+  const n0 = noi(m,0).noi, n1 = noi(m,1).noi, slope = n1 - n0;
+  return slope > 0 ? Math.max((target - n0)/slope, 0) : NaN;
+}
+
+function calc(){
+  const precio = v("precio");
+  const inv = precio*(1 + v("gcompra")/100) + v("reformas") + v("mobil");
+  const L = Math.min(v("prestamo"), inv);
+  const n = Math.max(1, v("anios"))*12, r = v("tin")/100/12;
+  const cuota = L===0 ? 0 : (r===0 ? L/n : L*r/(1-Math.pow(1+r,-n)));
+  const hipAnual = cuota*12, propio = inv - L;
+  const target = v("objetivo")/100 * inv;
+  $("cuota").textContent = L ? fmt2(cuota) + "/mes" : "Sin hipoteca";
+
+  // seleccionado
+  const p = mainParam(mode), cur_ = noi(mode,p);
+  const neta = cur_.noi/inv*100, bruta = cur_.ing/inv*100;
+  const flujo = (cur_.noi - hipAnual)/12;
+  const coc = propio>0 ? (cur_.noi - hipAnual)/propio*100 : NaN;
+
+  $("inv").textContent = fmt(inv);
+  $("ing").textContent = fmt(cur_.ing);
+  $("gas").textContent = fmt(cur_.gastos);
+  $("bruta").textContent = pct(bruta);
+  const nEl = $("neta"); nEl.textContent = pct(neta);
+  nEl.className = "v " + (neta>=v("objetivo")?"green":neta>=v("objetivo")*0.7?"gold":"red");
+  $("netaSub").innerHTML = neta>=v("objetivo") ? '<span class="tag ok">Alcanza tu objetivo</span>' : '<span class="tag warn">Por debajo del ' + v("objetivo") + '% objetivo</span>';
+  const fEl = $("flujo"); fEl.textContent = (flujo>=0?"+":"") + fmt2(flujo);
+  fEl.className = "v " + (flujo>=0?"green":"red");
+  $("flujoSub").textContent = L ? "Después de pagar la hipoteca (antes de impuestos)" : "Sin hipoteca (antes de impuestos)";
+  $("coc").textContent = pct(coc);
+
+  // recomendados
+  const lab = LABELS[mode];
+  const pObj = solve(mode, target), pMin = solve(mode, hipAnual);
+  const show = (x) => {
+    if(!isFinite(x)) return "—";
+    const base = mode==="vac" ? fmt2(x) + " / noche" : mode==="hab" ? fmt2(x) + " / habitación" : fmt2(x) + " / mes";
+    return base;
+  };
+  $("rec").textContent = show(pObj);
+  $("min").textContent = show(pMin);
+  $("recT").textContent = "Para una rentabilidad neta del " + v("objetivo") + "%";
+  const sub = x => { if(!isFinite(x)) return ""; const mm = model(mode,x).mensual; return mode==="trad" ? "Ingreso anual " + fmt(mm*Math.max(12-v("t_vacio"),0)) : "Ingreso medio " + fmt(mm) + "/mes"; };
+  $("recSub").textContent = sub(pObj);
+  $("minSub").textContent = (L ? "Cubre gastos y cuota. " : "Cubre los gastos. ") + sub(L? pMin : solve(mode,0));
+  if(!L) $("min").textContent = show(solve(mode,0));
+
+  // comparativa
+  let best = -Infinity, bestM = null;
+  const rows = ["trad","vac","hab"].map(m => {
+    const pp = mainParam(m), x = noi(m,pp), pr = solve(m,target);
+    const nt = x.noi/inv*100;
+    if(nt>best){best=nt;bestM=m;}
+    const unit = m==="vac" ? "/noche" : m==="hab" ? "/hab." : "/mes";
+    return {m, ing:x.ing, noi:x.noi, br:x.ing/inv*100, nt, fl:(x.noi-hipAnual)/12, pr: isFinite(pr)? fmt2(pr)+" "+unit : "—"};
+  });
+  $("cmp").innerHTML = rows.map(x =>
+    `<tr class="${x.m===bestM?'row-hl':''}"><td>${LABELS[x.m].name}${x.m===bestM?' <span class="best">★</span>':''}</td><td>${fmt(x.ing)}</td><td>${fmt(x.noi)}</td><td>${pct(x.br)}</td><td>${pct(x.nt)}</td><td class="${x.fl>=0?'green':'red'}">${fmt(x.fl)}</td><td>${x.pr}</td></tr>`).join("");
+}
+
+ROOT.querySelectorAll("input,select").forEach(i => i.addEventListener("input", calc));
+$("tabs").addEventListener("click", e => {
+  if(e.target.tagName!=="BUTTON") return;
+  mode = e.target.dataset.m;
+  [...$("tabs").children].forEach(b => b.classList.toggle("on", b===e.target));
+  ROOT.querySelectorAll(".mode").forEach(d => d.classList.toggle("on", d.id==="a-m-"+mode));
+  calc();
+});
+$("cur").addEventListener("click", e => {
+  if(e.target.tagName!=="BUTTON") return;
+  cur = e.target.dataset.c;
+  [...$("cur").children].forEach(b => b.classList.toggle("on", b===e.target));
+  ROOT.querySelectorAll(".cur").forEach(s => s.textContent = s.textContent.replace(/[€$]/, cur));
+  calc();
+});
+calc();
+
+})();</script>
+<script>
+(function(){
+  var routes = ["inicio","hipoteca","interes","alquiler"];
+  function go(){
+    var r = (location.hash.replace(/^#\/?/, "") || "inicio");
+    if(routes.indexOf(r) < 0) r = "inicio";
+    routes.forEach(function(k){
+      document.getElementById("page-" + k).classList.toggle("on", k === r);
+    });
+    document.querySelectorAll(".portal-nav .links a").forEach(function(a){
+      a.classList.toggle("on", a.getAttribute("data-r") === r);
+    });
+    window.scrollTo(0, 0);
+    document.title = {inicio:"Mi portal financiero", hipoteca:"Hipoteca", interes:"Interés compuesto", alquiler:"Alquiler y rentabilidad"}[r] + (r==="inicio" ? "" : " · Mi portal financiero");
+  }
+  window.addEventListener("hashchange", go);
+  go();
+
+  function setVal(id, val){
+    var el = document.getElementById(id);
+    el.value = val;
+    el.dispatchEvent(new Event("input", {bubbles:true}));
+  }
+  var imp = document.getElementById("a-import");
+  imp.addEventListener("click", function(){
+    var g = function(id){ return +document.getElementById(id).value || 0; };
+    setVal("a-precio", g("h-precio"));
+    setVal("a-prestamo", Math.max(g("h-precio") - g("h-entrada"), 0));
+    setVal("a-tin", g("h-tin"));
+    setVal("a-anios", g("h-anios"));
+  });
+})();
+</script>
+</body>
+</html>

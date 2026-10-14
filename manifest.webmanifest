@@ -1,0 +1,85 @@
+{
+ "name": "Numo",
+ "short_name": "Numo",
+ "id": "./",
+ "start_url": "./",
+ "scope": "./",
+ "lang": "es",
+ "description": "Tus finanzas personales y calculadoras de hipoteca, alquiler e interés compuesto.",
+ "display": "standalone",
+ "orientation": "any",
+ "background_color": "#e8e6e0",
+ "theme_color": "#e8e6e0",
+ "categories": [
+  "finance",
+  "productivity"
+ ],
+ "icons": [
+  {
+   "src": "assets/icon-192.png",
+   "sizes": "192x192",
+   "type": "image/png",
+   "purpose": "any"
+  },
+  {
+   "src": "assets/icon-512.png",
+   "sizes": "512x512",
+   "type": "image/png",
+   "purpose": "any"
+  },
+  {
+   "src": "assets/icon-maskable-512.png",
+   "sizes": "512x512",
+   "type": "image/png",
+   "purpose": "maskable"
+  },
+  {
+   "src": "assets/icon.svg",
+   "sizes": "any",
+   "type": "image/svg+xml",
+   "purpose": "any"
+  }
+ ],
+ "shortcuts": [
+  {
+   "name": "Mi panel",
+   "url": "./#panel",
+   "icons": [
+    {
+     "src": "assets/icon-192.png",
+     "sizes": "192x192"
+    }
+   ]
+  },
+  {
+   "name": "Hipoteca",
+   "url": "./#hipoteca",
+   "icons": [
+    {
+     "src": "assets/icon-192.png",
+     "sizes": "192x192"
+    }
+   ]
+  },
+  {
+   "name": "Alquiler",
+   "url": "./#alquiler",
+   "icons": [
+    {
+     "src": "assets/icon-192.png",
+     "sizes": "192x192"
+    }
+   ]
+  },
+  {
+   "name": "Interés compuesto",
+   "url": "./#interes",
+   "icons": [
+    {
+     "src": "assets/icon-192.png",
+     "sizes": "192x192"
+    }
+   ]
+  }
+ ]
+}
